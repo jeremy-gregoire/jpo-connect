@@ -144,6 +144,7 @@ Le wireframe permet de positionner les éléments dits "call to action" et de d�
   <img src="./assets/images/readme/charte.png" alt="charte graphique de jpo-connect" width="700">
 </div>
 <br>
+<p align="center">Charte graphique de l'application</p>
 Pour ce projet, notre charte graphique s'aligne avec les couleurs du centre de formation. Nous y retrouvons les différents logo, les couleurs principale, secondaire et tertinaire que nous disponsons en respectant la formule 60% - 30% - 10% et la police d'écriture.
 <br>
 <br>
@@ -154,6 +155,7 @@ Pour ce projet, notre charte graphique s'aligne avec les couleurs du centre de f
 <div align="center">
   <img src="./assets/images/readme/" alt="Screen du design établit" width="700">
 </div>
+<br>
 <p align="center">Schéma du rendu escompté de l'application</p>
 
 Le design représente la dernière étape de la composition. Il intègre la charte graphique, les effets de style et les animations dynamiques auxquels l'utilisateur sera confronté.
@@ -167,6 +169,7 @@ Le design représente la dernière étape de la composition. Il intègre la char
 <div align="center">
   <img src="./assets/images/readme/" alt="Screen du MCD" width="700">
 </div>
+<br>
 <p align="center">Schéma du MCD</p>
 
 La construction de la base donnée débute par le MCD. Il nous permet de déterminer et de confirmer les premières tables.
@@ -177,6 +180,7 @@ La construction de la base donnée débute par le MCD. Il nous permet de déterm
 <div align="center">
   <img src="./assets/images/readme/" alt="Screen du MLD" width="700">
 </div>
+<br>
 <p align="center">Schéma du MLD</p>
 
 Ce schéma nous permet de déterminer les clés primaires (Primary Key) et les clés étrangères (Foreign Key). Il présente les premières liaisons et dépendances qui structurent la base de données. On y retrouve également les cardinalités qui confirment les relations entre les entités.
@@ -187,6 +191,7 @@ Ce schéma nous permet de déterminer les clés primaires (Primary Key) et les c
 <div align="center">
   <img src="./assets/images/readme/" alt="Screen du MPD" width="700">
 </div>
+<br>
 <p align="center">Schéma du MPD</p>
 
 Dans ce schéma, nous ajoutons les champs pour identifier tous les éléments présents dans la base de données. Les liaisons sont plus détaillées et comportent les symboles nécessaires à la reconnaissance des relations.
@@ -197,6 +202,7 @@ Dans ce schéma, nous ajoutons les champs pour identifier tous les éléments pr
 <div align="center">
   <img src="./assets/images/readme/" alt="Screen de la base de données MySQL" width="700">
 </div>
+<br>
 <p align="center">Image de la base de données</p>
 
 Enfin, nous remplissons la base de données MySQL pour pouvoir manipuler l'ensemble de ces données et procéder à la mise en place des différentes requêtes dans le code.
