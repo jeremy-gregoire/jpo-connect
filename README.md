@@ -27,6 +27,10 @@
     - [Laptop](#laptop)
     - [Schéma](#les-schémas)
   - [Base de données](#base-de-données)
+    - [MCD](#mcd)
+    - [MLD](#mld)
+    - [MPD](#mpd)
+    - [MySQL](#mysql)
 
 - [Titillons votre curiosité](#😉-titillons-votre-curiosité)
 
@@ -163,7 +167,7 @@ Le design représente la dernière étape de la composition. Il intègre la char
 
 ## Base de données
 
-- MCD
+- mcd
 
 <br>
 <div align="center">
@@ -174,7 +178,7 @@ Le design représente la dernière étape de la composition. Il intègre la char
 
 La construction de la base donnée débute par le MCD. Il nous permet de déterminer et de confirmer les premières tables.
 
-- MLD
+- mld
 
 <br>
 <div align="center">
@@ -185,7 +189,7 @@ La construction de la base donnée débute par le MCD. Il nous permet de déterm
 
 Ce schéma nous permet de déterminer les clés primaires (Primary Key) et les clés étrangères (Foreign Key). Il présente les premières liaisons et dépendances qui structurent la base de données. On y retrouve également les cardinalités qui confirment les relations entre les entités.
 
-- MPD
+- mpd
 
 <br>
 <div align="center">
