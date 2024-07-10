@@ -205,19 +205,8 @@ Enfin, nous remplissons la base de données MySQL pour pouvoir manipuler l'ensem
 
 Allez, on vous montre une ébauche de cette application !
 
-- Mettre 3 screens de l'application de la partie utilisateur (pas du panel admin)
-
-<br>
-<div style="display:flex; gap:20px; justify-content:center;">
-  <div>
-    <img src="./assets/images/readme/" alt="Screen 1" width="400">
-  </div>
-  <div>
-    <img src="./assets/images/readme/" alt="Screen 2" width="400">
-  </div>
-  <div>
-    <img src="./assets/images/readme/" alt="Screen 3" width="400">
-  </div>
+<div align="center">
+  <img src="./assets/images/readme/" alt="Screen des 3 images (sur le même screen)" width="400">
 </div>
 
 # 🔗 Site
