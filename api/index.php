@@ -5,11 +5,15 @@ header("Access-Control-Allow-Headers: Content-Type");
 
 require_once "./bdd.php";
 
-if (!isset($_POST["query"])) {
-  $_POST["query"] = "error";
+if (!isset($_GET["query"])) {
+  $_GET["query"] = "error";
 }
 
-switch ($_POST["query"]) {
+switch ($_GET["query"]) {
+  case "register":
+    header("Location: index.php");
+    break;
+
   case "error":
     header("Content-Type: application/json");
     echo json_encode([

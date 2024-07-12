@@ -1,5 +1,5 @@
 <?php
-include ("./user.php");
+include "./user.php";
 class ModelUser extends BDD
 {
     public function createUser(User $user, string $password): bool
