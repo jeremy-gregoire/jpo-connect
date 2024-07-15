@@ -2,46 +2,19 @@
 
 class User
 {
-    private $id;
-    private $firstname;
-    private $lastname;
-    private $email;
-    private $password;
-    private $avatar;
-    private $idRole;
-    private $updateAt;
-    private $createdAt;
+    public $id;
+    public string $firstname;
+    public string $lastname;
+    public string $email;
+    public string $avatar;
+    public string $updated_at;
+    public string $created_at;
 
-    public function getId()
+    public function __construct(string $firstname = "", string $lastname = "", string $email = "", string $avatar = "")
     {
-        return $this->id;
-    }
-    public function getFirstname()
-    {
-        return $this->firstname;
-    }
-    public function getLastname()
-    {
-        return $this->lastname;
-    }
-    public function getEmail()
-    {
-        return $this->email;
-    }
-    public function getAvatar()
-    {
-        return $this->avatar;
-    }
-    public function getIdRole()
-    {
-        return $this->idRole;
-    }
-    public function getUpdatedAt()
-    {
-        return $this->updateAt;
-    }
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
+        $this->firstname = $firstname;
+        $this->lastname = $lastname;
+        $this->email = $email;
+        $this->avatar = $avatar;
     }
 }

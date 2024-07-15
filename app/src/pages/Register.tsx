@@ -1,56 +1,71 @@
-// RegisterForm.tsx
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, { FormEvent } from "react";
+import axios from "axios";
 
 const RegisterForm: React.FC = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
+  // const [formData, setFormData] = useState({
+  //   firstname: "",
+  //   lastname: "",
+  //   email: "",
+  //   password: "",
+  //   role: "",
+  // });
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    // pour l'évènement (e) --> obliger de mettre (e: ChangeEvent<HTMLInputElement>) sinon
-    // TypeScript ne reconnait pas l'évènement
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+  // const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = e.target;
+  //   setFormData({
+  //     ...formData,
+  //     [name]: value,
+  //   });
+  // };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    try {
-      const response = await fetch("http://localhost:80/index.php?query=register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+    /* 
+      ici on change la méthode Fecth par l'utilisation du module Axios
+      je n'ai plus d'erreur dans la console
+      mais les données ne sont pas envoyé dans la base de donnée 
+    */
+    axios
+      .post(
+        "http://localhost:80/jpo-connect/api/index.php",
+        {
+          firstname: formData.get("firstname"),
+          lastname: formData.get("lastname"),
+          email: formData.get("email"),
+          password: formData.get("password"),
         },
-        body: JSON.stringify(formData),
-      });
+        {
+          params: {
+            query: "register",
+          },
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((response) => console.log(response.data))
+      .catch((error) => console.error(error));
+    // try {
+    //   const response = await axios.post(
+    //     "http://localhost:80/jpo-connect/api/index.php?query=register",
+    //     new URLSearchParams(formData).toString(),
+    //     {
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //     }
+    //   );
 
-      if (!response.ok) {
-        throw new Error("Erreur lors de la requête");
-      }
-
-      const data = await response.json();
-
-      // Vérification de la présence d'une erreur dans la réponse
-      if (data && data.error) {
-        throw new Error(data.error);
-      }
-
-      console.log("Réponse du serveur:", data);
-      // Ajoutez ici la logique pour gérer la réponse du backend si nécessaire
-    } catch (error) {
-      // Typage pour gérer correctement l'erreur
-      if (error instanceof Error) {
-        console.error("Erreur lors de l'envoi des données:", error.message);
-      } else {
-        console.error("Erreur inconnue:", error);
-      }
-    }
+    //   console.log("Réponse du serveur:", response.data);
+    //   console.log(formData);
+    // } catch (error: any) {
+    //   if (error instanceof Error) {
+    //     console.error("Erreur lors de l'envoi des données:", error.message);
+    //     console.error("Erreur inconnue:", error);
+    //   }
+    // }
   };
 
   return (
@@ -58,37 +73,20 @@ const RegisterForm: React.FC = () => {
       <h2>Page d'inscription</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="name">Nom:</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
+          <label htmlFor="firstname">Prénom:</label>
+          <input type="text" id="firstname" name="firstname" required />
+        </div>
+        <div>
+          <label htmlFor="lastname">Nom:</label>
+          <input type="text" id="lastname" name="lastname" required />
         </div>
         <div>
           <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
+          <input type="email" id="email" name="email" required />
         </div>
         <div>
           <label htmlFor="password">Mot de passe:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
+          <input type="password" id="password" name="password" required />
         </div>
         <button type="submit">S'inscrire</button>
       </form>

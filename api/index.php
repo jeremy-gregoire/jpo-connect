@@ -11,7 +11,20 @@ if (!isset($_GET["query"])) {
 
 switch ($_GET["query"]) {
   case "register":
-    header("Location: index.php");
+    include 'userModel.php';
+    include 'userRoleModel.php';
+
+    $model = new ModelUser();
+    $modelRoleUser = new ModelUserRole();
+
+    $data = json_decode(file_get_contents("php://input"));
+
+    // Appeler la méthode createUser
+    $user = new User($data->firstname, $data->lastname, $data->email, "");
+    $model->createUser($user, $data->password);
+
+    $theUser = $model->getUser($user->email);
+    $modelRoleUser->addUserRole(4, $theUser["id"]);
     break;
 
   case "error":
