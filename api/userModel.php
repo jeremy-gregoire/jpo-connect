@@ -6,7 +6,8 @@ class ModelUser extends BDD
     {
         parent::__construct();
     }
-
+    // ici on a la requete pour récupérer un utilisateur
+    // ca correspond à l'entité qu'on a du crée parce qu'on avait deux cardinalité infinie
     public function getUser(string $email)
     {
         try {
@@ -20,6 +21,7 @@ class ModelUser extends BDD
         }
     }
 
+    // ici on a la requête pour crée un utilisateur
     public function createUser(User $user, string $password): bool
     {
         try {

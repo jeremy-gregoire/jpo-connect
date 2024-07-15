@@ -2,11 +2,13 @@
 
 class ModelUserRole extends BDD
 {
+    // toujours mettre le construct pour la création de la classe et faire la connexion avec la base de donnée
     public function __construct()
     {
         parent::__construct();
     }
-
+    // fin du construct, toujours ce format là cherche pas à te prendre la tête
+    
     public function addUserRole(int $id_role, int $id_user)
     {
         try {

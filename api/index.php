@@ -14,9 +14,11 @@ switch ($_GET["query"]) {
     include 'userModel.php';
     include 'userRoleModel.php';
 
+    // instancier le modèle
     $model = new ModelUser();
     $modelRoleUser = new ModelUserRole();
 
+    // on récupère ce qu'on a envoyer avec axios
     $data = json_decode(file_get_contents("php://input"));
 
     // Appeler la méthode createUser
@@ -24,14 +26,7 @@ switch ($_GET["query"]) {
     $model->createUser($user, $data->password);
 
     $theUser = $model->getUser($user->email);
+    // on crée un utlisateur en ajouatant l'id du role
     $modelRoleUser->addUserRole(4, $theUser["id"]);
-    break;
-
-  case "error":
-    header("Content-Type: application/json");
-    echo json_encode([
-      "status" => 404,
-      "message" => "Invalid request"
-    ]);
     break;
 }

@@ -19,7 +19,9 @@ const RegisterForm: React.FC = () => {
   // };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    // permet d'éviter de recharger la page
     e.preventDefault();
+    // recupère le formuaire et ses data
     const form = e.target as HTMLFormElement;
     const formData = new FormData(form);
     /* 
@@ -37,6 +39,7 @@ const RegisterForm: React.FC = () => {
           password: formData.get("password"),
         },
         {
+          // index.php?query=register
           params: {
             query: "register",
           },
@@ -47,6 +50,8 @@ const RegisterForm: React.FC = () => {
       )
       .then((response) => console.log(response.data))
       .catch((error) => console.error(error));
+
+    form.reset();
     // try {
     //   const response = await axios.post(
     //     "http://localhost:80/jpo-connect/api/index.php?query=register",
