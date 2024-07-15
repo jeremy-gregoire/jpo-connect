@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { z } from 'zod';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const apiPath = 'http://localhost:80/webalizer/jpo-connect';
 
@@ -35,6 +36,7 @@ const actionCellStyle: React.CSSProperties = {
 
 export default function AdminOpendayList() {
   const [opendays, setOpendays] = useState<Openday[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -50,6 +52,18 @@ export default function AdminOpendayList() {
       <h1>Gestion des journées portes ouvertes</h1>
       <table style={tableStyle}>
         <thead>
+          <tr>
+            <th colSpan={5}></th>
+            <th style={actionCellStyle}>
+              <button
+                onClick={() => {
+                  navigate('/admin/openday-manager-add');
+                }}
+              >
+                Ajouter
+              </button>
+            </th>
+          </tr>
           <tr>
             <th>#</th>
             <th>Titre</th>
@@ -67,10 +81,22 @@ export default function AdminOpendayList() {
                 <td style={cellStyle}>{openday.updated_at}</td>
                 <td style={cellStyle}>{openday.created_at}</td>
                 <td style={actionCellStyle}>
-                  <button>Modifier</button>
+                  <button
+                    onClick={() => {
+                      console.log('Redirectoring to the modification page');
+                    }}
+                  >
+                    Modifier
+                  </button>
                 </td>
                 <td style={actionCellStyle}>
-                  <button>Supprimer</button>
+                  <button
+                    onClick={() => {
+                      console.log('Deleting openday');
+                    }}
+                  >
+                    Supprimer
+                  </button>
                 </td>
               </tr>
             );
