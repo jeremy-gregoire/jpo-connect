@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { z } from 'zod';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const apiPath = 'http://localhost:80/webalizer/jpo-connect';
 
@@ -77,13 +77,15 @@ export default function AdminOpendayList() {
             return (
               <tr key={crypto.randomUUID()}>
                 <td style={cellStyle}>{openday.id}</td>
-                <td style={cellStyle}>{openday.title}</td>
+                <td style={cellStyle}>
+                  <Link to={`/openday/${openday.id}`}>{openday.title}</Link>
+                </td>
                 <td style={cellStyle}>{openday.updated_at}</td>
                 <td style={cellStyle}>{openday.created_at}</td>
                 <td style={actionCellStyle}>
                   <button
                     onClick={() => {
-                      navigate(`/admin/${openday.id}/modify`);
+                      navigate(`/admin/openday/${openday.id}/modify`);
                     }}
                   >
                     Modifier
