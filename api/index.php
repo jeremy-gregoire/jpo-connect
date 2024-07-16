@@ -37,7 +37,29 @@ switch ($_GET["query"]) {
     $model->addOpenday($openday);
 
     echo json_encode([
-      "message" => "Données ajouter avec succès !",
+      "message" => "Data successfully added!",
+    ]);
+    break;
+  case "modifyOpenday":
+
+    include "./models/opendayModel.php";
+
+    $data = json_decode(file_get_contents("php://input"));
+
+    $openday = new Openday();
+    $openday->title = $data->title;
+    $openday->description = $data->description;
+    $openday->max_participants = $data->max_participants;
+    $openday->nb_participants = $data->nb_participants;
+    $openday->opening_date = $data->opening_date;
+    $openday->opening_time = $data->opening_time;
+    $openday->closing_time = $data->closing_time;
+    $openday->id_place = $data->id_place;
+
+    $model = new OpendayModel();
+    $model->modifyOpenday($data->id, $openday);
+    echo json_encode([
+      "message" => "Data successfully modified!",
     ]);
     break;
   case "places":

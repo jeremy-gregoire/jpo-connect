@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { FormEvent, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { z } from 'zod';
 
 const apiPath = 'http://localhost:80/webalizer/jpo-connect';
@@ -28,8 +28,20 @@ const PlaceSchema = z.object({
   capacity: z.number(),
 });
 
+const OpendayRespectSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  max_participants: z.number().min(0),
+  nb_participants: z.number().min(0),
+  opening_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Invalid date format'), // YYYY-MM-DD
+  opening_time: z.string().regex(/^\d{2}:\d{2}:\d{2}$/, 'Invalid time format'), // HH:MM:SS
+  closing_time: z.string().regex(/^\d{2}:\d{2}:\d{2}$/, 'Invalid time format'), // HH:MM:SS
+  id_place: z.number(),
+});
+
 // Setup my type as my schema
 type Openday = z.infer<typeof OpendaySchema>;
+type OpendayRespect = z.infer<typeof OpendayRespectSchema>;
 type Place = z.infer<typeof PlaceSchema>;
 
 export default function AdminModifyOpenday() {
@@ -37,6 +49,7 @@ export default function AdminModifyOpenday() {
   const [openday, setOpenday] = useState<Openday>({} as Openday);
   const [places, setPlaces] = useState<Place[]>([]);
   const [selectedPlace, setSelectedPlace] = useState<string>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -68,9 +81,58 @@ export default function AdminModifyOpenday() {
       .catch((error) => console.error(error));
   }, []);
 
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+
+    const openday: OpendayRespect = {
+      title: formData.get('title')?.toString() || '',
+      description: formData.get('description')?.toString() || '',
+      max_participants: parseInt(formData.get('max_participants')?.toString() || '0'),
+      nb_participants: parseInt(formData.get('nb_participants')?.toString() || '0'),
+      opening_date: formData.get('opening_date')?.toString() || '',
+      opening_time: formData.get('opening_time')?.toString() || '',
+      closing_time: formData.get('closing_time')?.toString() || '',
+      id_place: parseInt(formData.get('place')?.toString() || '1'),
+    };
+    const safeObject = OpendayRespectSchema.safeParse(openday);
+
+    if (safeObject.success) {
+      axios
+        .post(
+          `${apiPath}/api/index.php`,
+          {
+            id: id,
+            title: openday.title,
+            description: openday.description,
+            max_participants: openday.max_participants,
+            nb_participants: openday.nb_participants,
+            opening_date: openday.opening_date,
+            opening_time: openday.opening_time,
+            closing_time: openday.closing_time,
+            id_place: openday.id_place,
+          },
+          {
+            params: {
+              query: 'modifyOpenday',
+            },
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        )
+        .then((_) => navigate('/admin/opendays'))
+        .catch((error) => console.log(error));
+    } else {
+      console.error(safeObject.error.message);
+    }
+  };
+
   return (
     <>
-      <form method='post'>
+      <form method='post' onSubmit={handleSubmit}>
         <div>
           <label htmlFor='title'>Titre</label>
           <input type='text' name='title' id='title' defaultValue={openday.title} />

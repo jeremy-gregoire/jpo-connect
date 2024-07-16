@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import AdminOpendayList from './pages/AdminOpendayList';
 import AdminAddOpenday from './pages/AdminAddOpenday';
 import AdminModifyOpenday from './pages/AdminModifyOpenday';
+import AdminDeleteConfirmationOpenday from './pages/AdminDeleteConfirmationOpenday';
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
         <Route path='/admin/opendays' element={<AdminOpendayList />} />
         <Route path='/admin/openday/add' element={<AdminAddOpenday />} />
         <Route path='/admin/openday/:id/modify' element={<AdminModifyOpenday />} />
+        <Route path='/admin/openday/:id/delete' element={<AdminDeleteConfirmationOpenday />} />
       </Routes>
     </>
   );

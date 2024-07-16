@@ -47,8 +47,6 @@ export default function AdminAddOpenday() {
     const form = e.target as HTMLFormElement;
     const formData = new FormData(form);
 
-    console.log(formData.get('opening_time')?.toString() || '');
-
     const openday: Openday = {
       title: formData.get('title')?.toString() || '',
       description: formData.get('description')?.toString() || '',
