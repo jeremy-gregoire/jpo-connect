@@ -19,7 +19,7 @@ const OpendaySchema = z.object({
   id_place: z.number(),
 });
 
-// Setup my type as my schema (test)
+// Setup my type as my schema
 type Openday = z.infer<typeof OpendaySchema>;
 
 export default function AdminOpendayList() {
