@@ -21,6 +21,20 @@ class OpendayModel extends BDD
     }
   }
 
+  public function getOpenday(int $id): Openday
+  {
+    try {
+      $query = "SELECT * FROM openday WHERE id = :id;";
+      $stmt = $this->connection->prepare($query);
+      $stmt->setFetchMode(PDO::FETCH_CLASS, "Openday");
+      $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+      $stmt->execute();
+      return $stmt->fetch();
+    } catch (PDOException $e) {
+      throw new Error($e->getMessage());
+    }
+  }
+
   public function addOpenday(Openday $openday): void
   {
     try {

@@ -57,7 +57,7 @@ export default function AdminOpendayList() {
             <th style={actionCellStyle}>
               <button
                 onClick={() => {
-                  navigate('/admin/openday-manager-add');
+                  navigate('/admin/openday/add');
                 }}
               >
                 Ajouter
@@ -83,7 +83,7 @@ export default function AdminOpendayList() {
                 <td style={actionCellStyle}>
                   <button
                     onClick={() => {
-                      console.log('Redirectoring to the modification page');
+                      navigate(`/admin/${openday.id}/modify`);
                     }}
                   >
                     Modifier

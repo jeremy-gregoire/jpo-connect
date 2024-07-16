@@ -12,12 +12,30 @@ switch ($_GET["query"]) {
     $model = new OpendayModel();
     echo json_encode($model->getOpendays());
     break;
+  case "openday":
+    include "./models/opendayModel.php";
+    $model = new OpendayModel();
+    $data = json_decode(file_get_contents("php://input"));
+    echo json_encode($model->getOpenday($data->id));
+    break;
   case "addOpenday":
     include "./models/opendayModel.php";
+
     $data = json_decode(file_get_contents("php://input"));
-    $openday = new Openday($data->title, $data->description, $data->max_participants, $data->nb_participants, $data->opening_date, $data->opening_time, $data->closing_time, $data->id_place);
+
+    $openday = new Openday();
+    $openday->title = $data->title;
+    $openday->description = $data->description;
+    $openday->max_participants = $data->max_participants;
+    $openday->nb_participants = $data->nb_participants;
+    $openday->opening_date = $data->opening_date;
+    $openday->opening_time = $data->opening_time;
+    $openday->closing_time = $data->closing_time;
+    $openday->id_place = $data->id_place;
+
     $model = new OpendayModel();
     $model->addOpenday($openday);
+
     echo json_encode([
       "message" => "Données ajouter avec succès !",
     ]);

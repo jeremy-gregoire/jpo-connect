@@ -8,8 +8,8 @@ const OpendaySchema = z.object({
   max_participants: z.number().min(0),
   nb_participants: z.number().min(0),
   opening_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Invalid date format'), // YYYY-MM-DD
-  opening_time: z.string().regex(/^\d{2}:\d{2}:\d{2}$/, 'Invalid time format'), // HH:MM:SS
-  closing_time: z.string().regex(/^\d{2}:\d{2}:\d{2}$/, 'Invalid time format'), // HH:MM:SS,
+  opening_time: z.string().regex(/^\d{2}:\d{2}$/, 'Invalid time format'), // HH:MM
+  closing_time: z.string().regex(/^\d{2}:\d{2}$/, 'Invalid time format'), // HH:MM
   id_place: z.number(),
 });
 
@@ -29,6 +29,7 @@ type Place = z.infer<typeof PlaceSchema>;
 const apiPath = 'http://localhost:80/webalizer/jpo-connect';
 
 export default function AdminAddOpenday() {
+  const todayDate: string = new Date().toISOString().split('T')[0];
   const [places, setPlaces] = useState<Place[]>([]);
 
   useEffect(() => {
@@ -46,6 +47,8 @@ export default function AdminAddOpenday() {
     const form = e.target as HTMLFormElement;
     const formData = new FormData(form);
 
+    console.log(formData.get('opening_time')?.toString() || '');
+
     const openday: Openday = {
       title: formData.get('title')?.toString() || '',
       description: formData.get('description')?.toString() || '',
@@ -54,15 +57,38 @@ export default function AdminAddOpenday() {
       opening_date: formData.get('opening_date')?.toString() || '',
       opening_time: formData.get('opening_time')?.toString() || '',
       closing_time: formData.get('closing_time')?.toString() || '',
-      id_place: 1,
+      id_place: parseInt(formData.get('place')?.toString() || '1'),
     };
     const safeObject = OpendaySchema.safeParse(openday);
 
     if (safeObject.success) {
-      // fetch the data
+      axios
+        .post(
+          `${apiPath}/api/index.php`,
+          {
+            title: openday.title,
+            description: openday.description,
+            max_participants: openday.max_participants,
+            nb_participants: openday.nb_participants,
+            opening_date: openday.opening_date,
+            opening_time: openday.opening_time,
+            closing_time: openday.closing_time,
+            id_place: openday.id_place,
+          },
+          {
+            params: {
+              query: 'addOpenday',
+            },
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        )
+        .then((response) => console.log(response.data))
+        .catch((error) => console.log(error));
       form.reset();
     } else {
-      console.error(safeObject.error);
+      console.error(safeObject.error.message);
     }
   };
 
@@ -110,7 +136,8 @@ export default function AdminAddOpenday() {
             type='date'
             name='opening_date'
             id='opening_date'
-            min={new Date().toISOString().split('T')[0]}
+            min={todayDate}
+            defaultValue={todayDate}
           />
         </div>
 
@@ -129,27 +156,3 @@ export default function AdminAddOpenday() {
     </>
   );
 }
-
-// axios
-//   .post(
-//     `${apiPath}/api/index.php`,
-//     {
-//       title: 'Je suis une saucisse sauvage',
-//       description: 'Je suis une fougère !',
-//       max_participants: 300,
-//       nb_participants: 140,
-//       opening_date: '2024-01-09',
-//       opening_time: '08:45:00',
-//       closing_time: '17:30:00',
-//       id_place: 1,
-//     },
-//     {
-//       params: {
-//         query: 'addOpenday',
-//       },
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//     }
-//   )
-//   .catch((error) => console.log(error));
