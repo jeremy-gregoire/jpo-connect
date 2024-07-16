@@ -8,15 +8,16 @@ class User
     public string $lastname;
     public string $email;
     public string $avatar;
+    private string $password;
     public string $updated_at;
     public string $created_at;
 
-    public function __construct(string $firstname = "", string $lastname = "", string $email = "", string $avatar = "")
-    {
-        // ces paramètre permettent de dire ce qu'on envoie depuis cette classe
-        $this->firstname = $firstname;
-        $this->lastname = $lastname;
-        $this->email = $email;
-        $this->avatar = $avatar;
-    }
+    // public function __construct(string $firstname = "", string $lastname = "", string $email = "", string $avatar = "")
+    // {
+    //     // ces paramètre permettent de dire ce qu'on envoie depuis cette classe
+    //     $this->firstname = $firstname;
+    //     $this->lastname = $lastname;
+    //     $this->email = $email;
+    //     $this->avatar = $avatar;
+    // }
 }

@@ -1,5 +1,6 @@
 import { Link, Route, Routes } from "react-router-dom";
 import Register from "./pages/Register";
+import Profil from "./pages/Profil";
 
 export default function App() {
   return (
@@ -13,18 +14,13 @@ export default function App() {
             <Link to="/register">S'inscrire</Link>
           </li>
           <li>
-            <Link to="/">Se Connecter</Link>
-          </li>
-          <li>
-            <Link to="/">Profil</Link>
-          </li>
-          <li>
-            <Link to="/">Ajouter JPO</Link>
+            <Link to="/profil">Profil</Link>
           </li>
         </ul>
       </nav>
       <Routes>
         <Route path="/register" element={<Register />} />
+        <Route path="/profil" element={<Profil />} />
         <Route path="*" element={<h1>404</h1>} />
       </Routes>
     </>

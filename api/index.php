@@ -22,11 +22,26 @@ switch ($_GET["query"]) {
     $data = json_decode(file_get_contents("php://input"));
 
     // Appeler la méthode createUser
-    $user = new User($data->firstname, $data->lastname, $data->email, "");
+    $user = new User();
+    $user->firstname = $data->firstname;
+    $user->lastname = $data->lastname;
+    $user->email = $data->email;
+    $user->avatar = "";
     $model->createUser($user, $data->password);
 
     $theUser = $model->getUser($user->email);
     // on crée un utlisateur en ajouatant l'id du role
     $modelRoleUser->addUserRole(4, $theUser["id"]);
+    break;
+
+  case "profil":
+    include 'profilModel.php';
+
+    $model = new ModelProfil();
+
+    // on récupère ce qu'on a envoyer avec axios
+    $data = json_decode(file_get_contents("php://input"));
+
+    echo json_encode($model->getUserData($data->id));
     break;
 }
