@@ -12,6 +12,15 @@ export default function App() {
           <li>
             <Link to="/register">S'inscrire</Link>
           </li>
+          <li>
+            <Link to="/">Se Connecter</Link>
+          </li>
+          <li>
+            <Link to="/">Profil</Link>
+          </li>
+          <li>
+            <Link to="/">Ajouter JPO</Link>
+          </li>
         </ul>
       </nav>
       <Routes>
