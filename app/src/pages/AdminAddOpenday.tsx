@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { FormEvent, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 
 const OpendaySchema = z.object({
@@ -31,6 +32,7 @@ const apiPath = 'http://localhost:80/webalizer/jpo-connect';
 export default function AdminAddOpenday() {
   const todayDate: string = new Date().toISOString().split('T')[0];
   const [places, setPlaces] = useState<Place[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -82,9 +84,9 @@ export default function AdminAddOpenday() {
             },
           }
         )
-        .then((response) => console.log(response.data))
         .catch((error) => console.log(error));
-      form.reset();
+
+      navigate(`/admin/opendays`);
     } else {
       console.error(safeObject.error.message);
     }

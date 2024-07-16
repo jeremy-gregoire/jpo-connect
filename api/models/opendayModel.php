@@ -77,4 +77,16 @@ class OpendayModel extends BDD
       throw new Error($e->getMessage());
     }
   }
+
+  public function deleteOpenday(int $id): void
+  {
+    try {
+      $query = "DELETE FROM openday WHERE id = :id;";
+      $stmt = $this->connection->prepare($query);
+      $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+      $stmt->execute();
+    } catch (PDOException $e) {
+      throw new Error($e->getMessage());
+    }
+  }
 }

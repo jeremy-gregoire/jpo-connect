@@ -22,18 +22,6 @@ const OpendaySchema = z.object({
 // Setup my type as my schema
 type Openday = z.infer<typeof OpendaySchema>;
 
-const tableStyle: React.CSSProperties = {
-  width: '100%',
-};
-
-const cellStyle: React.CSSProperties = {
-  backgroundColor: 'gray',
-};
-
-const actionCellStyle: React.CSSProperties = {
-  textAlign: 'center',
-};
-
 export default function AdminOpendayList() {
   const [opendays, setOpendays] = useState<Openday[]>([]);
   const navigate = useNavigate();
@@ -50,11 +38,11 @@ export default function AdminOpendayList() {
   return (
     <>
       <h1>Gestion des journées portes ouvertes</h1>
-      <table style={tableStyle}>
+      <table>
         <thead>
           <tr>
             <th colSpan={5}></th>
-            <th style={actionCellStyle}>
+            <th>
               <button
                 onClick={() => {
                   navigate('/admin/openday/add');
@@ -76,13 +64,13 @@ export default function AdminOpendayList() {
           {opendays.map((openday: Openday) => {
             return (
               <tr key={crypto.randomUUID()}>
-                <td style={cellStyle}>{openday.id}</td>
-                <td style={cellStyle}>
+                <td>{openday.id}</td>
+                <td>
                   <Link to={`/openday/${openday.id}`}>{openday.title}</Link>
                 </td>
-                <td style={cellStyle}>{openday.updated_at}</td>
-                <td style={cellStyle}>{openday.created_at}</td>
-                <td style={actionCellStyle}>
+                <td>{openday.updated_at}</td>
+                <td>{openday.created_at}</td>
+                <td>
                   <button
                     onClick={() => {
                       navigate(`/admin/openday/${openday.id}/modify`);
@@ -91,10 +79,10 @@ export default function AdminOpendayList() {
                     Modifier
                   </button>
                 </td>
-                <td style={actionCellStyle}>
+                <td>
                   <button
                     onClick={() => {
-                      console.log('Deleting openday');
+                      navigate(`/admin/openday/${openday.id}/delete`);
                     }}
                   >
                     Supprimer

@@ -41,7 +41,6 @@ switch ($_GET["query"]) {
     ]);
     break;
   case "modifyOpenday":
-
     include "./models/opendayModel.php";
 
     $data = json_decode(file_get_contents("php://input"));
@@ -61,6 +60,12 @@ switch ($_GET["query"]) {
     echo json_encode([
       "message" => "Data successfully modified!",
     ]);
+    break;
+  case "deleteOpenday":
+    include "./models/opendayModel.php";
+    $data = json_decode(file_get_contents("php://input"));
+    $model = new OpendayModel();
+    $model->deleteOpenday($data->id);
     break;
   case "places":
     include "./models/placeModel.php";
