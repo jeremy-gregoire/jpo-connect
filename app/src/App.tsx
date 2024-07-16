@@ -25,6 +25,7 @@ export default function App() {
       </nav>
       <Routes>
         <Route path="/register" element={<Register />} />
+        <Route path="*" element={<h1>404</h1>} />
       </Routes>
     </>
   );
