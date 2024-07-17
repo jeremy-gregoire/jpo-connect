@@ -1,0 +1,88 @@
+/* access NavBar */
+.accessNav {
+  background-color: #002e78;
+}
+
+.accessUl {
+  list-style-type: none;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px 50px 10px 10px;
+  gap: 15px;
+  margin: 0;
+}
+
+.accessRef {
+  color: black;
+  text-decoration: none;
+  background-color: white;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+/* main NavBar */
+.mainNav {
+  background-color: #0062ff;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center; /* Assure que les items sont centrés verticalement */
+}
+
+.logo {
+  background-color: white;
+}
+
+.avatar {
+  justify-self: end;
+  margin: auto;
+  border-radius: 100%;
+  width: 100px;
+  height: 100px;
+  background-color: rgb(206, 27, 197);
+  text-align: center;
+}
+
+.mainUl {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  height: 100%; /* Prend toute la hauteur de la nav */
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  display: inline;
+  justify-content: center;
+  height: 100%; /* Prend toute la hauteur de la nav */
+}
+
+.mainRef {
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  height: 100%; /* Prend toute la hauteur de l'élément parent */
+  padding: 0 10px; /* Ajoute un padding horizontal pour les liens */
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px; /* Épaisseur de la ligne de soulignement */
+  text-underline-offset: 15px; /* Décalage de la ligne de soulignement par rapport au texte */
+}
+
+.mainNav .mainUl .mainLink.mainRef.active {
+  /* Styles pour les liens actifs dans mainNav */
+  font-weight: bold;
+  color: blue;
+  background: rgb(255, 255, 255);
+  backdrop-filter: blur(10.5px);
+  -webkit-backdrop-filter: blur(10.5px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}

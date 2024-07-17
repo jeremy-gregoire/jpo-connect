@@ -23,5 +23,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "assets/components/footer.tsx"]
+  // "include": ["src", "assets/components/footer.tsx"]
 }
