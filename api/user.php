@@ -14,10 +14,11 @@ class User
 
     // public function __construct(string $firstname = "", string $lastname = "", string $email = "", string $avatar = "")
     // {
-    //     // ces paramètre permettent de dire ce qu'on envoie depuis cette classe
+    // ces paramètre permettent de dire ce qu'on envoie depuis cette classe
     //     $this->firstname = $firstname;
     //     $this->lastname = $lastname;
     //     $this->email = $email;
     //     $this->avatar = $avatar;
     // }
 }
+

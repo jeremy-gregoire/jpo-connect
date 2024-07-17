@@ -75,7 +75,6 @@ const RegisterForm: React.FC = () => {
 
   return (
     <div>
-      <h2>Page d'inscription</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="firstname">Prénom:</label>

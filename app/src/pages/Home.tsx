@@ -34,7 +34,6 @@ const Details: React.FC = () => {
 
   return (
     <>
-      <h2>Page Home</h2>
       <p>NOS JPO A VENIR</p>
       {/* {error && <p>Erreur: {error.message}</p>}
       {profileData && (

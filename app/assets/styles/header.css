@@ -71,12 +71,6 @@ li {
   padding-right: 25px;
 }
 
-a:hover {
-  text-decoration: underline;
-  text-decoration-thickness: 2px; /* Épaisseur de la ligne de soulignement */
-  text-underline-offset: 15px; /* Décalage de la ligne de soulignement par rapport au texte */
-}
-
 .mainNav .mainUl .mainLink.mainRef.active {
   /* Styles pour les liens actifs dans mainNav */
   font-weight: bold;

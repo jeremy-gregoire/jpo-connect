@@ -38,7 +38,6 @@ const Details: React.FC = () => {
 
   return (
     <>
-      <h2>Page de profil</h2>
       {error && <p>Erreur: {error.message}</p>}
       {profileData && (
         <div>

@@ -44,4 +44,15 @@ switch ($_GET["query"]) {
 
     echo json_encode($model->getUserData($data->id));
     break;
+
+  case "connection":
+    include 'connectionModel.php';
+
+    $model = new ConnectionModel();
+
+    // on récupère ce qu'on a envoyer avec axios
+    $data = json_decode(file_get_contents("php://input"));
+
+    echo json_encode($model->verifyUser($data->email, $data->password));
+    break;
 }
