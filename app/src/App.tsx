@@ -1,6 +1,7 @@
 import { Link, Route, Routes } from "react-router-dom";
 import Register from "./pages/Register";
 import Profil from "./pages/Profil";
+import Home from "./pages/Home";
 
 export default function App() {
   return (
@@ -8,7 +9,7 @@ export default function App() {
       <nav>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/home">Home</Link>
           </li>
           <li>
             <Link to="/register">S'inscrire</Link>
@@ -19,6 +20,7 @@ export default function App() {
         </ul>
       </nav>
       <Routes>
+        <Route path="/home" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profil" element={<Profil />} />
         <Route path="*" element={<h1>404</h1>} />
