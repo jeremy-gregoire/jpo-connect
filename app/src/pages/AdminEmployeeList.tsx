@@ -69,7 +69,13 @@ export default function AdminEmployeeList() {
                   <button>Modifier</button>
                 </td>
                 <td>
-                  <button>Supprimer</button>
+                  <button
+                    onClick={() => {
+                      navigate(`/admin/employee/${employee.id}/delete`);
+                    }}
+                  >
+                    Supprimer
+                  </button>
                 </td>
               </tr>
             );

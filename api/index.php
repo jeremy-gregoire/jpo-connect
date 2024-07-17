@@ -33,4 +33,10 @@ switch ($_GET["query"]) {
 
     echo json_encode($employee);
     break;
+  case "deleteEmployee":
+    include "./models/userModel.php";
+    $data = json_decode(file_get_contents("php://input"));
+    $model = new ModelUser();
+    $model->deleteUser($data->id);
+    break;
 }

@@ -1,5 +1,6 @@
 <?php
 include "./classes/user.php";
+
 class ModelUser extends BDD
 {
   public function __construct()
@@ -47,6 +48,18 @@ class ModelUser extends BDD
       $stmt->bindParam(':password', $pwd, PDO::PARAM_STR); // Hasher le mot de passe
       $stmt->bindParam(':avatar', $user->avatar, PDO::PARAM_STR);
       return $stmt->execute();
+    } catch (PDOException $e) {
+      throw new Error($e->getMessage());
+    }
+  }
+
+  public function deleteUser(int $id): void
+  {
+    try {
+      $query = "DELETE FROM user WHERE id = :id;";
+      $stmt = $this->connection->prepare($query);
+      $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+      $stmt->execute();
     } catch (PDOException $e) {
       throw new Error($e->getMessage());
     }
