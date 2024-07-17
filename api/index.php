@@ -7,4 +7,9 @@ header("Content-Type: application/json");
 require_once "./classes/bdd.php";
 
 switch ($_GET["query"]) {
+  case "employees":
+    include "./models/userModel.php";
+    $model = new ModelUser();
+    echo json_encode($model->getEmployees());
+    break;
 }
