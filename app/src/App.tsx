@@ -2,6 +2,7 @@ import { Link, Route, Routes } from "react-router-dom";
 import Register from "./pages/Register";
 import Profil from "./pages/Profil";
 import Home from "./pages/Home";
+import Footer from "../assets/components/footer";
 
 export default function App() {
   return (
@@ -25,6 +26,12 @@ export default function App() {
         <Route path="/profil" element={<Profil />} />
         <Route path="*" element={<h1>404</h1>} />
       </Routes>
+
+      <div className="App">
+        {/* Autres composants de ton application */}
+
+        <Footer />
+      </div>
     </>
   );
 }
