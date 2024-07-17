@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const apiPath = 'http://localhost:80/webalizer/jpo-connect';
 
@@ -14,6 +15,7 @@ type Employee = {
 };
 
 export default function AdminEmployeeList() {
+  const navigate = useNavigate();
   const [employees, setEmployees] = useState<Employee[]>([]);
 
   useEffect(() => {
@@ -32,7 +34,13 @@ export default function AdminEmployeeList() {
           <tr>
             <td colSpan={8}></td>
             <td>
-              <button>Ajouter</button>
+              <button
+                onClick={() => {
+                  navigate('/admin/employee/add');
+                }}
+              >
+                Ajouter
+              </button>
             </td>
           </tr>
           <tr>
