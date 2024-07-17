@@ -14,15 +14,29 @@ type Employee = {
   created_at: string;
 };
 
+type Role = {
+  id: number;
+  label: string;
+};
+
 export default function AdminEmployeeList() {
   const navigate = useNavigate();
   const [employees, setEmployees] = useState<Employee[]>([]);
+  const [roles, setRoles] = useState<Role[]>([]);
+  const [selectedRole, setSelectedRole] = useState<number>(1);
 
   useEffect(() => {
     axios
       .get(`${apiPath}/api/index.php?query=employees`)
       .then((response) => {
         setEmployees(response.data);
+      })
+      .catch((error) => console.error(error));
+
+    axios
+      .get(`${apiPath}/api/index.php?query=roles`)
+      .then((response) => {
+        setRoles(response.data);
       })
       .catch((error) => console.error(error));
   }, []);
@@ -51,11 +65,32 @@ export default function AdminEmployeeList() {
             <th>avatar</th>
             <th>Compte modifier le</th>
             <th>Enregistrer le</th>
-            <th colSpan={2}>Action</th>
+            <th>Role</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
           {employees.map((employee) => {
+            axios
+              .post(
+                `${apiPath}/api/index.php`,
+                {
+                  id: employee.id,
+                },
+                {
+                  params: {
+                    query: 'userRole',
+                  },
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                }
+              )
+              .then((response) => {
+                setSelectedRole(response.data.id_role);
+              })
+              .catch((error) => console.error(error));
+
             return (
               <tr key={crypto.randomUUID()}>
                 <td>{employee.id}</td>
@@ -66,7 +101,23 @@ export default function AdminEmployeeList() {
                 <td>{employee.updated_at}</td>
                 <td>{employee.created_at}</td>
                 <td>
-                  <button>Modifier</button>
+                  <form method='post'>
+                    <select
+                      name='roles'
+                      id='roles'
+                      value={selectedRole}
+                      onChange={(e) => setSelectedRole(e.target.value as any)}
+                    >
+                      {roles.map((role) => {
+                        return (
+                          <option key={crypto.randomUUID()} value={role.id}>
+                            {role.label}
+                          </option>
+                        );
+                      })}
+                    </select>
+                    <button>Modifier</button>
+                  </form>
                 </td>
                 <td>
                   <button

@@ -39,4 +39,15 @@ switch ($_GET["query"]) {
     $model = new ModelUser();
     $model->deleteUser($data->id);
     break;
+  case "roles":
+    include "./models/roleModel.php";
+    $model = new RoleModel();
+    echo json_encode($model->getRoles());
+    break;
+  case "userRole":
+    include "./models/roleUserModel.php";
+    $model = new ModelUserRole();
+    $data = json_decode(file_get_contents("php://input"));
+    echo json_encode($model->getUserRole($data->id));
+    break;
 }

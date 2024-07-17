@@ -1,9 +1,25 @@
 <?php
+include "./classes/userRole.php";
+
 class ModelUserRole extends BDD
 {
   public function __construct()
   {
     parent::__construct();
+  }
+
+  public function getUserRole(int $id_user)
+  {
+    try {
+      $query = "select * from role_user where id_user = :id_user;";
+      $stmt = $this->connection->prepare($query);
+      $stmt->bindParam(":id_user", $id_user, PDO::PARAM_INT);
+      $stmt->setFetchMode(PDO::FETCH_CLASS, "UserRole");
+      $stmt->execute();
+      return $stmt->fetch();
+    } catch (PDOException $e) {
+      throw new Error($e->getMessage());
+    }
   }
 
   public function addUserRole(int $id_role, int $id_user): void

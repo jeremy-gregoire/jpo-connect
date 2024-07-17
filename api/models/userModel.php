@@ -53,6 +53,22 @@ class ModelUser extends BDD
     }
   }
 
+  public function modifyHighUser(int $old_id_role, int $id_user, int $new_id_role): void
+  {
+    try {
+      $query = "UPDATE role_user SET id_role = :new_id_role, updated_at = CURRENT_TIMESTAMP WHERE id_role = :old_id_role AND id_user = :id_user;";
+      $stmt = $this->connection->prepare($query);
+
+      $stmt->bindParam(":old_id_role", $old_id_role, PDO::PARAM_INT);
+      $stmt->bindParam(":id_user", $id_user, PDO::PARAM_INT);
+      $stmt->bindParam(":new_id_role", $new_id_role, PDO::PARAM_INT);
+
+      $stmt->execute();
+    } catch (PDOException $e) {
+      throw new Error($e->getMessage());
+    }
+  }
+
   public function deleteUser(int $id): void
   {
     try {

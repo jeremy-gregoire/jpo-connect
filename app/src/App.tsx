@@ -10,7 +10,6 @@ export default function App() {
       <Routes>
         <Route path='/admin/employees' element={<AdminEmployeeList />} />
         <Route path='/admin/employee/add' element={<AdminAddEmployee />} />
-        <Route path='/admin/employee/:id/modify' element={null} />
         <Route path='/admin/employee/:id/delete' element={<AdminDeleteConfirmationEmployee />} />
       </Routes>
     </>
