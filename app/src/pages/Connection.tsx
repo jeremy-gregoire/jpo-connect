@@ -1,10 +1,12 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
+const apiPath = 'http://localhost:80/webalizer/jpo-connect';
 
 const Login: React.FC = () => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
   const [profileData, setProfileData] = useState<any>(null);
   const navigate = useNavigate();
@@ -15,14 +17,14 @@ const Login: React.FC = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:80/jpo-connect/api/index.php",
+        `${apiPath}/api/index.php`,
         { email, password },
         {
           params: {
-            query: "connection",
+            query: 'connection',
           },
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
         }
       );
@@ -31,12 +33,12 @@ const Login: React.FC = () => {
 
       if (response.data) {
         setProfileData(response.data.user);
-        navigate("/"); // Rediriger vers la page d'accueil
+        navigate('/'); // Rediriger vers la page d'accueil
       } else {
-        setError("Email ou mot de passe incorrect.");
+        setError('Email ou mot de passe incorrect.');
       }
     } catch (error) {
-      console.error("Erreur lors de la requête:", error);
+      console.error('Erreur lors de la requête:', error);
 
       // Affichez les détails de l'erreur
       if (axios.isAxiosError(error)) {
@@ -62,26 +64,26 @@ const Login: React.FC = () => {
       ) : (
         <form onSubmit={handleLogin}>
           <div>
-            <label htmlFor="email">Email:</label>
+            <label htmlFor='email'>Email:</label>
             <input
-              type="email"
-              id="email"
+              type='email'
+              id='email'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
           <div>
-            <label htmlFor="password">Mot de passe:</label>
+            <label htmlFor='password'>Mot de passe:</label>
             <input
-              type="password"
-              id="password"
+              type='password'
+              id='password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
-          <button type="submit">Se connecter</button>
+          <button type='submit'>Se connecter</button>
         </form>
       )}
     </>

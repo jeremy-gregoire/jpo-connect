@@ -9,4 +9,9 @@ class User
   private string $password;
   public string $updated_at;
   public string $created_at;
+
+  public function getPassword()
+  {
+    return $this->password;
+  }
 }

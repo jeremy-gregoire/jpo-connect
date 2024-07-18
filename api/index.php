@@ -115,8 +115,8 @@ switch ($_GET["query"]) {
     echo json_encode($model->getPlaces());
     break;
   case "register":
-    include 'userModel.php';
-    include 'userRoleModel.php';
+    include './models/userModel.php';
+    include './models/userRoleModel.php';
 
     // instancier le modèle
     $model = new ModelUser();
@@ -139,12 +139,21 @@ switch ($_GET["query"]) {
     break;
 
   case "profil":
-    include 'profilModel.php';
-    include 'update.php';
+    include './models/userModel.php';
 
-    $model = new ModelProfil();
-    $mode2 = new ModelUpdate();
+    $model = new ModelUser();
 
     // on récupère ce qu'on a envoyer avec axios
     $data = json_decode(file_get_contents("php://input"));
+    echo json_encode($model->getUserById($data->id));
+  case "connection":
+    include './models/connectionModel.php';
+
+    $model = new ConnectionModel();
+
+    // on récupère ce qu'on a envoyer avec axios
+    $data = json_decode(file_get_contents("php://input"));
+
+    echo json_encode($model->verifyUser($data->email, $data->password));
+    break;
 }

@@ -8,6 +8,19 @@ class ModelUser extends BDD
     parent::__construct();
   }
 
+  public function getUserById(int $id)
+  {
+    try {
+      $query = "select * from user where id = :id;";
+      $stmt = $this->connection->prepare($query);
+      $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+      $stmt->execute();
+      return $stmt->fetch();
+    } catch (PDOException $e) {
+      throw new Error($e->getMessage());
+    }
+  }
+
   public function getUser(string $email)
   {
     try {

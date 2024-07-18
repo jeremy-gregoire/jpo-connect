@@ -1,6 +1,5 @@
 <?php
-
-include "./user.php";
+include "./classes/user.php";
 
 class ConnectionModel extends BDD
 {
