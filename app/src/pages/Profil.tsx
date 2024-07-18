@@ -3,6 +3,13 @@ import axios from "axios";
 
 const Details: React.FC = () => {
   const [profileData, setProfileData] = useState<any>(null);
+  const [editableData, setEditableData] = useState<any>(null);
+  const [editMode, setEditMode] = useState<any>({
+    firstname: false,
+    lastname: false,
+    email: false,
+  });
+  const [globalEdit, setGlobalEdit] = useState<boolean>(false);
   const [error, setError] = useState<any>(null);
 
   useEffect(() => {
@@ -10,7 +17,7 @@ const Details: React.FC = () => {
       .post(
         "http://localhost:80/jpo-connect/api/index.php",
         {
-          id: 2,
+          id: 1,
         },
         {
           params: {
@@ -22,29 +29,183 @@ const Details: React.FC = () => {
         }
       )
       .then((response) => {
-        console.log(response.data);
         setProfileData(response.data);
+        setEditableData(response.data); // Initialize editable data
       })
       .catch((error) => {
-        console.error(error);
         setError(error);
       });
   }, []);
 
-  /* 
-    Le tableau vide [] signifie que cet effet ne se produira qu'une seule fois, 
-    lors du montage du composant.
-  */
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setEditableData({ ...editableData, [name]: value });
+  };
+
+  const handleSave = (field: string) => {
+    axios
+      .post(
+        "http://localhost:80/jpo-connect/api/update.php",
+        {
+          [field]: editableData[field],
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((response) => {
+        setProfileData({ ...profileData, [field]: editableData[field] });
+        setEditMode({ ...editMode, [field]: false });
+        alert("Profil mis à jour avec succès !");
+      })
+      .catch((error) => {
+        setError(error);
+      });
+  };
+
+  const handleCancel = (field: string) => {
+    setEditableData({ ...editableData, [field]: profileData[field] });
+    setEditMode({ ...editMode, [field]: false });
+  };
+
+  const handleGlobalSave = () => {
+    axios
+      .post(
+        "http://localhost:80/jpo-connect/api/update.php",
+        {
+          ...editableData,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((response) => {
+        setProfileData(editableData);
+        setEditMode({
+          firstname: false,
+          lastname: false,
+          email: false,
+        });
+        setGlobalEdit(false);
+        alert("Profil mis à jour avec succès !");
+      })
+      .catch((error) => {
+        setError(error);
+      });
+  };
+
+  const handleGlobalCancel = () => {
+    setEditableData(profileData);
+    setEditMode({
+      firstname: false,
+      lastname: false,
+      email: false,
+    });
+    setGlobalEdit(false);
+  };
+
+  const toggleEditMode = (field: string) => {
+    setEditMode({ ...editMode, [field]: !editMode[field] });
+  };
+
+  const toggleGlobalEdit = () => {
+    setGlobalEdit(!globalEdit);
+    setEditMode({
+      firstname: !globalEdit,
+      lastname: !globalEdit,
+      email: !globalEdit,
+    });
+  };
 
   return (
     <>
       {error && <p>Erreur: {error.message}</p>}
-      {profileData && (
+      {editableData && (
         <div>
-          <p>Prénom: {profileData.firstname}</p>
-          <p>Nom: {profileData.lastname}</p>
-          <p>E-mail: {profileData.email}</p>
-          {/* Ajoutez d'autres informations du profil ici */}
+          <div>
+            <label>
+              Prénom:
+              {editMode.firstname ? (
+                <input
+                  type="text"
+                  name="firstname"
+                  value={editableData.firstname}
+                  onChange={handleChange}
+                />
+              ) : (
+                <span>{profileData.firstname}</span>
+              )}
+            </label>
+            {editMode.firstname ? (
+              <>
+                <button onClick={() => handleSave("firstname")}>Enregistrer</button>
+                <button onClick={() => handleCancel("firstname")}>Annuler</button>
+              </>
+            ) : (
+              <button onClick={() => toggleEditMode("firstname")}>Modifier</button>
+            )}
+          </div>
+          <div>
+            <label>
+              Nom:
+              {editMode.lastname ? (
+                <input
+                  type="text"
+                  name="lastname"
+                  value={editableData.lastname}
+                  onChange={handleChange}
+                />
+              ) : (
+                <span>{profileData.lastname}</span>
+              )}
+            </label>
+            {editMode.lastname ? (
+              <>
+                <button onClick={() => handleSave("lastname")}>Enregistrer</button>
+                <button onClick={() => handleCancel("lastname")}>Annuler</button>
+              </>
+            ) : (
+              <button onClick={() => toggleEditMode("lastname")}>Modifier</button>
+            )}
+          </div>
+          <div>
+            <label>
+              E-mail:
+              {editMode.email ? (
+                <input
+                  type="email"
+                  name="email"
+                  value={editableData.email}
+                  onChange={handleChange}
+                />
+              ) : (
+                <span>{profileData.email}</span>
+              )}
+            </label>
+            {editMode.email ? (
+              <>
+                <button onClick={() => handleSave("email")}>Enregistrer</button>
+                <button onClick={() => handleCancel("email")}>Annuler</button>
+              </>
+            ) : (
+              <button onClick={() => toggleEditMode("email")}>Modifier</button>
+            )}
+          </div>
+          <div>
+            <button onClick={toggleGlobalEdit}>
+              {globalEdit ? "Arrêter la modification globale" : "Modifier tout le formulaire"}
+            </button>
+            {globalEdit && (
+              <>
+                <button onClick={handleGlobalSave}>Enregistrer tout</button>
+                <button onClick={handleGlobalCancel}>Annuler tout</button>
+              </>
+            )}
+          </div>
         </div>
       )}
     </>

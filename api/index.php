@@ -36,8 +36,10 @@ switch ($_GET["query"]) {
 
   case "profil":
     include 'profilModel.php';
+    include 'update.php';
 
     $model = new ModelProfil();
+    $mode2 = new ModelUpdate();
 
     // on récupère ce qu'on a envoyer avec axios
     $data = json_decode(file_get_contents("php://input"));

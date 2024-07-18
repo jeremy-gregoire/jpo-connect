@@ -75,9 +75,9 @@
 /* Animation pour fermer la porte */
 @keyframes closeDoor {
   0% {
-    transform: rotateY(0deg);
+    transform: rotateY(-90deg);
   }
   100% {
-    transform: rotateY(-90deg);
+    transform: rotateY(0deg);
   }
 }
