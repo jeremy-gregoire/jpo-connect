@@ -44,10 +44,9 @@ switch ($_GET["query"]) {
     $model = new RoleModel();
     echo json_encode($model->getRoles());
     break;
-  case "userRole":
+  case "userRoleId":
     include "./models/roleUserModel.php";
     $model = new ModelUserRole();
-    $data = json_decode(file_get_contents("php://input"));
-    echo json_encode($model->getUserRole($data->id));
+    // echo json_encode($model->getUsersRoles());
     break;
 }

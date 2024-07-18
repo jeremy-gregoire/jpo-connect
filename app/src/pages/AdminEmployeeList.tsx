@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const apiPath = 'http://localhost:80/webalizer/jpo-connect';
@@ -23,7 +23,7 @@ export default function AdminEmployeeList() {
   const navigate = useNavigate();
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [roles, setRoles] = useState<Role[]>([]);
-  const [selectedRole, setSelectedRole] = useState<number>(1);
+  const [selectedRole, setSelectedRole] = useState<string>('3');
 
   useEffect(() => {
     axios
@@ -40,6 +40,11 @@ export default function AdminEmployeeList() {
       })
       .catch((error) => console.error(error));
   }, []);
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    console.log(`Role modified`);
+  };
 
   return (
     <>
@@ -71,26 +76,6 @@ export default function AdminEmployeeList() {
         </thead>
         <tbody>
           {employees.map((employee) => {
-            axios
-              .post(
-                `${apiPath}/api/index.php`,
-                {
-                  id: employee.id,
-                },
-                {
-                  params: {
-                    query: 'userRole',
-                  },
-                  headers: {
-                    'Content-Type': 'application/json',
-                  },
-                }
-              )
-              .then((response) => {
-                setSelectedRole(response.data.id_role);
-              })
-              .catch((error) => console.error(error));
-
             return (
               <tr key={crypto.randomUUID()}>
                 <td>{employee.id}</td>
@@ -101,12 +86,13 @@ export default function AdminEmployeeList() {
                 <td>{employee.updated_at}</td>
                 <td>{employee.created_at}</td>
                 <td>
-                  <form method='post'>
+                  <form onSubmit={handleSubmit} method='post'>
+                    <input type='hidden' name='employeeId' value={employee.id} />
                     <select
                       name='roles'
                       id='roles'
                       value={selectedRole}
-                      onChange={(e) => setSelectedRole(e.target.value as any)}
+                      onChange={(e) => setSelectedRole(e.target.value as string)}
                     >
                       {roles.map((role) => {
                         return (
@@ -116,7 +102,7 @@ export default function AdminEmployeeList() {
                         );
                       })}
                     </select>
-                    <button>Modifier</button>
+                    <button type='submit'>Modifier</button>
                   </form>
                 </td>
                 <td>

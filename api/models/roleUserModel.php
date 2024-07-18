@@ -8,6 +8,19 @@ class ModelUserRole extends BDD
     parent::__construct();
   }
 
+  public function getUsersRoles(): array
+  {
+    try {
+      $query = "select * from role_user;";
+      $stmt = $this->connection->prepare($query);
+      $stmt->setFetchMode(PDO::FETCH_CLASS, "UserRole");
+      $stmt->execute();
+      return $stmt->fetchAll();
+    } catch (PDOException $e) {
+      throw new Error($e->getMessage());
+    }
+  }
+
   public function getUserRole(int $id_user)
   {
     try {
