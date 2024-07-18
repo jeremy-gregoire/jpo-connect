@@ -29,7 +29,7 @@ const Login: React.FC = () => {
       console.log("POUR VOIR SI C'EST ENVOYER");
       console.log(response.data); // Affichez la réponse pour déboguer
 
-      if (response.data.success) {
+      if (response.data) {
         setProfileData(response.data.user);
         navigate("/"); // Rediriger vers la page d'accueil
       } else {

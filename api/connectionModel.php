@@ -34,7 +34,7 @@ class ConnectionModel extends BDD
             $user = $stmt->fetch();
 
             if ($user && password_verify($password, $user->getPassword())) {
-                return $user;
+                return true;
             } else {
                 return false;
             }

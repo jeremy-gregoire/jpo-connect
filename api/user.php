@@ -12,6 +12,11 @@ class User
     public string $updated_at;
     public string $created_at;
 
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
     // public function __construct(string $firstname = "", string $lastname = "", string $email = "", string $avatar = "")
     // {
     // ces paramètre permettent de dire ce qu'on envoie depuis cette classe
