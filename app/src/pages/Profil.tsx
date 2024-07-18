@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
-const apiPath = 'http://localhost:80/webalizer/jpo-connect';
+const apiPath = "http://localhost:80/webalizer/jpo-connect";
 
 const Details: React.FC = () => {
   const [profileData, setProfileData] = useState<any>(null);
@@ -23,10 +23,10 @@ const Details: React.FC = () => {
         },
         {
           params: {
-            query: 'profil',
+            query: "profil",
           },
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
       )
@@ -55,14 +55,14 @@ const Details: React.FC = () => {
         },
         {
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
       )
-      .then((response) => {
+      .then((_) => {
         setProfileData({ ...profileData, [field]: editableData[field] });
         setEditMode({ ...editMode, [field]: false });
-        alert('Profil mis à jour avec succès !');
+        alert("Profil mis à jour avec succès !");
       })
       .catch((error) => {
         setError(error);
@@ -83,11 +83,11 @@ const Details: React.FC = () => {
         },
         {
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
       )
-      .then((response) => {
+      .then((_) => {
         setProfileData(editableData);
         setEditMode({
           firstname: false,
@@ -95,7 +95,7 @@ const Details: React.FC = () => {
           email: false,
         });
         setGlobalEdit(false);
-        alert('Profil mis à jour avec succès !');
+        alert("Profil mis à jour avec succès !");
       })
       .catch((error) => {
         setError(error);
@@ -136,8 +136,8 @@ const Details: React.FC = () => {
               Prénom:
               {editMode.firstname ? (
                 <input
-                  type='text'
-                  name='firstname'
+                  type="text"
+                  name="firstname"
                   value={editableData.firstname}
                   onChange={handleChange}
                 />
@@ -147,11 +147,11 @@ const Details: React.FC = () => {
             </label>
             {editMode.firstname ? (
               <>
-                <button onClick={() => handleSave('firstname')}>Enregistrer</button>
-                <button onClick={() => handleCancel('firstname')}>Annuler</button>
+                <button onClick={() => handleSave("firstname")}>Enregistrer</button>
+                <button onClick={() => handleCancel("firstname")}>Annuler</button>
               </>
             ) : (
-              <button onClick={() => toggleEditMode('firstname')}>Modifier</button>
+              <button onClick={() => toggleEditMode("firstname")}>Modifier</button>
             )}
           </div>
           <div>
@@ -159,8 +159,8 @@ const Details: React.FC = () => {
               Nom:
               {editMode.lastname ? (
                 <input
-                  type='text'
-                  name='lastname'
+                  type="text"
+                  name="lastname"
                   value={editableData.lastname}
                   onChange={handleChange}
                 />
@@ -170,11 +170,11 @@ const Details: React.FC = () => {
             </label>
             {editMode.lastname ? (
               <>
-                <button onClick={() => handleSave('lastname')}>Enregistrer</button>
-                <button onClick={() => handleCancel('lastname')}>Annuler</button>
+                <button onClick={() => handleSave("lastname")}>Enregistrer</button>
+                <button onClick={() => handleCancel("lastname")}>Annuler</button>
               </>
             ) : (
-              <button onClick={() => toggleEditMode('lastname')}>Modifier</button>
+              <button onClick={() => toggleEditMode("lastname")}>Modifier</button>
             )}
           </div>
           <div>
@@ -182,8 +182,8 @@ const Details: React.FC = () => {
               E-mail:
               {editMode.email ? (
                 <input
-                  type='email'
-                  name='email'
+                  type="email"
+                  name="email"
                   value={editableData.email}
                   onChange={handleChange}
                 />
@@ -193,16 +193,16 @@ const Details: React.FC = () => {
             </label>
             {editMode.email ? (
               <>
-                <button onClick={() => handleSave('email')}>Enregistrer</button>
-                <button onClick={() => handleCancel('email')}>Annuler</button>
+                <button onClick={() => handleSave("email")}>Enregistrer</button>
+                <button onClick={() => handleCancel("email")}>Annuler</button>
               </>
             ) : (
-              <button onClick={() => toggleEditMode('email')}>Modifier</button>
+              <button onClick={() => toggleEditMode("email")}>Modifier</button>
             )}
           </div>
           <div>
             <button onClick={toggleGlobalEdit}>
-              {globalEdit ? 'Arrêter la modification globale' : 'Modifier tout le formulaire'}
+              {globalEdit ? "Arrêter la modification globale" : "Modifier tout le formulaire"}
             </button>
             {globalEdit && (
               <>

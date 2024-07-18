@@ -1,20 +1,20 @@
 // src/components/NavBar.js
-import { NavLink } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 
-import '../styles/header.css';
+import "../styles/header.css";
 
 const NavBar = () => {
   return (
     <>
       <div>
-        <nav className='accessNav'>
-          <ul className='accessUl'>
+        <nav className="accessNav">
+          <ul className="accessUl">
             <li>
               <NavLink
                 className={({ isActive }) =>
-                  isActive ? 'accesLink accessRef active' : 'accesLink accessRef'
+                  isActive ? "accesLink accessRef active" : "accesLink accessRef"
                 }
-                to='/home'
+                to="/admin/opendays"
               >
                 Access
               </NavLink>
@@ -22,24 +22,24 @@ const NavBar = () => {
             <li>
               <NavLink
                 className={({ isActive }) =>
-                  isActive ? 'accesLink accessRef active' : 'accesLink accessRef'
+                  isActive ? "accesLink accessRef active" : "accesLink accessRef"
                 }
-                to='/home'
+                to="/#"
               >
                 Doc
               </NavLink>
             </li>
           </ul>
         </nav>
-        <nav className='mainNav'>
-          <img className='logo' src='../assets/images/logos/logo.png' alt='logo plateforme bleu' />
-          <ul className='mainUl'>
+        <nav className="mainNav">
+          <img className="logo" src="../assets/images/logos/logo.png" alt="logo plateforme bleu" />
+          <ul className="mainUl">
             <li>
               <NavLink
                 className={({ isActive }) =>
-                  isActive ? 'mainLink mainRef active' : 'mainLink mainRef'
+                  isActive ? "mainLink mainRef active" : "mainLink mainRef"
                 }
-                to='/home'
+                to="/home"
               >
                 Home
               </NavLink>
@@ -47,9 +47,9 @@ const NavBar = () => {
             <li>
               <NavLink
                 className={({ isActive }) =>
-                  isActive ? 'mainLink mainRef active' : 'mainLink mainRef'
+                  isActive ? "mainLink mainRef active" : "mainLink mainRef"
                 }
-                to='/register'
+                to="/register"
               >
                 S'inscrire
               </NavLink>
@@ -57,9 +57,9 @@ const NavBar = () => {
             <li>
               <NavLink
                 className={({ isActive }) =>
-                  isActive ? 'mainLink mainRef active' : 'mainLink mainRef'
+                  isActive ? "mainLink mainRef active" : "mainLink mainRef"
                 }
-                to='/connection'
+                to="/connection"
               >
                 Connexion
               </NavLink>
@@ -67,15 +67,15 @@ const NavBar = () => {
             <li>
               <NavLink
                 className={({ isActive }) =>
-                  isActive ? 'mainLink mainRef active' : 'mainLink mainRef'
+                  isActive ? "mainLink mainRef active" : "mainLink mainRef"
                 }
-                to='/profil'
+                to="/profil"
               >
                 Profil
               </NavLink>
             </li>
           </ul>
-          <div className='avatar'>avatar</div>
+          <div className="avatar">avatar</div>
         </nav>
       </div>
     </>

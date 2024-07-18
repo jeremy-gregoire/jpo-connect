@@ -1,46 +1,10 @@
 import React from "react";
-// import React, { useEffect, useState } from "react";
-// import axios from "axios";
 
 const Details: React.FC = () => {
-  //   const [profileData, setProfileData] = useState<any>(null);
-  //   const [error, setError] = useState<any>(null);
-
-  //   useEffect(() => {
-  //     axios
-  //       .post(
-  //         "http://localhost:80/jpo-connect/api/index.php",
-  //         {
-  //           id: 2,
-  //         },
-  //         {
-  //           params: {
-  //             query: "profil",
-  //           },
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //           },
-  //         }
-  //       )
-  //       .then((response) => {
-  //         console.log(response.data);
-  //         setProfileData(response.data);
-  //       })
-  //       .catch((error) => {
-  //         console.error(error);
-  //         setError(error);
-  //       });
-  //   }, []);
 
   return (
     <>
       <p>NOS JPO A VENIR</p>
-      {/* {error && <p>Erreur: {error.message}</p>}
-      {profileData && (
-        <div>
-          <p>Prénom: {profileData.firstname}</p>
-        </div>
-      )} */}
       <p>LES ACTUALITEES DE LA PLATEFORME</p>
       <div>
         <p>Newletter IA - n°1</p>
