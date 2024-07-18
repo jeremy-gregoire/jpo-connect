@@ -31,14 +31,15 @@
 
 .logo {
   background-color: white;
+  width: 100px;
 }
 
 .avatar {
   justify-self: end;
   margin: auto;
   border-radius: 100%;
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 70px;
   background-color: rgb(206, 27, 197);
   text-align: center;
 }
@@ -48,7 +49,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 25px;
+  font-size: 20px;
   height: 100%; /* Prend toute la hauteur de la nav */
   margin: 0;
   padding: 0;

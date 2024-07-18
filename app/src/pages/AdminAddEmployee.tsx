@@ -1,7 +1,9 @@
-import axios from 'axios';
-import { FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { z } from 'zod';
+import axios from "axios";
+import { FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
+import { z } from "zod";
+
+import NavBarAdmin from "../../assets/components/header_admin";
 
 const EmployeeSchema = z.object({
   firstname: z.string(),
@@ -14,7 +16,7 @@ const EmployeeSchema = z.object({
 // Setup my types as my schemas
 type Employee = z.infer<typeof EmployeeSchema>;
 
-const apiPath = 'http://localhost:80/webalizer/jpo-connect';
+const apiPath = "http://localhost:80/webalizer/jpo-connect";
 
 export default function AdminAddEmployee() {
   const navigate = useNavigate();
@@ -25,11 +27,11 @@ export default function AdminAddEmployee() {
     const formData: FormData = new FormData(e.target as HTMLFormElement);
 
     const employee: Employee = {
-      firstname: formData.get('firstname')?.toString() || '',
-      lastname: formData.get('lastname')?.toString() || '',
-      email: formData.get('email')?.toString() || '',
-      password: formData.get('password')?.toString() || '',
-      avatar: '',
+      firstname: formData.get("firstname")?.toString() || "",
+      lastname: formData.get("lastname")?.toString() || "",
+      email: formData.get("email")?.toString() || "",
+      password: formData.get("password")?.toString() || "",
+      avatar: "",
     };
     const safeObject = EmployeeSchema.safeParse(employee);
 
@@ -46,15 +48,15 @@ export default function AdminAddEmployee() {
           },
           {
             params: {
-              query: 'addEmployee',
+              query: "addEmployee",
             },
             headers: {
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json",
             },
           }
         )
         .then((_) => {
-          navigate('/admin/employees');
+          navigate("/admin/employees");
         })
         .catch((error) => console.error(error));
     } else {
@@ -64,29 +66,30 @@ export default function AdminAddEmployee() {
 
   return (
     <>
+      <NavBarAdmin></NavBarAdmin>
       <h1>Ajouter un employé</h1>
-      <form onSubmit={handleSubmit} method='post'>
+      <form onSubmit={handleSubmit} method="post">
         <div>
-          <label htmlFor='firstname'>Prénom</label>
-          <input type='text' name='firstname' id='firstname' required />
+          <label htmlFor="firstname">Prénom</label>
+          <input type="text" name="firstname" id="firstname" required />
         </div>
 
         <div>
-          <label htmlFor='lastname'>Nom de famille</label>
-          <input type='text' name='lastname' id='lastname' required />
+          <label htmlFor="lastname">Nom de famille</label>
+          <input type="text" name="lastname" id="lastname" required />
         </div>
 
         <div>
-          <label htmlFor='email'>Email</label>
-          <input type='email' name='email' id='email' required />
+          <label htmlFor="email">Email</label>
+          <input type="email" name="email" id="email" required />
         </div>
 
         <div>
-          <label htmlFor='password'>Mot de passe</label>
-          <input type='password' name='password' id='password' min={8} required />
+          <label htmlFor="password">Mot de passe</label>
+          <input type="password" name="password" id="password" min={8} required />
         </div>
 
-        <button type='submit'>Ajouter</button>
+        <button type="submit">Ajouter</button>
       </form>
     </>
   );

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+import NavBar from "../../assets/components/header";
+
 const apiPath = 'http://localhost:80/webalizer/jpo-connect';
 
 const Login: React.FC = () => {
@@ -52,6 +54,9 @@ const Login: React.FC = () => {
 
   return (
     <>
+      <div className="App">
+        <NavBar />
+      </div>
       {error && <p>Erreur: {error}</p>}
       {profileData ? (
         <div>
@@ -64,26 +69,26 @@ const Login: React.FC = () => {
       ) : (
         <form onSubmit={handleLogin}>
           <div>
-            <label htmlFor='email'>Email:</label>
+            <label htmlFor="email">Email:</label>
             <input
-              type='email'
-              id='email'
+              type="email"
+              id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
           <div>
-            <label htmlFor='password'>Mot de passe:</label>
+            <label htmlFor="password">Mot de passe:</label>
             <input
-              type='password'
-              id='password'
+              type="password"
+              id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
-          <button type='submit'>Se connecter</button>
+          <button type="submit">Se connecter</button>
         </form>
       )}
     </>

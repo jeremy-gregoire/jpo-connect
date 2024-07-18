@@ -1,9 +1,11 @@
-import axios from 'axios';
-import { z } from 'zod';
-import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import axios from "axios";
+import { z } from "zod";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-const apiPath = 'http://localhost:80/webalizer/jpo-connect';
+import NavBarAdmin from "../../assets/components/header_admin";
+
+const apiPath = "http://localhost:80/webalizer/jpo-connect";
 
 const OpendaySchema = z.object({
   id: z.number(),
@@ -37,6 +39,7 @@ export default function AdminOpendayList() {
 
   return (
     <>
+      <NavBarAdmin></NavBarAdmin>
       <h1>Gestion des journées portes ouvertes</h1>
       <table>
         <thead>
@@ -45,7 +48,7 @@ export default function AdminOpendayList() {
             <th>
               <button
                 onClick={() => {
-                  navigate('/admin/openday/add');
+                  navigate("/admin/openday/add");
                 }}
               >
                 Ajouter

@@ -2,6 +2,8 @@ import axios from 'axios';
 import { FormEvent } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
+import NavBarAdmin from "../../assets/components/header_admin";
+
 const apiPath = 'http://localhost:80/webalizer/jpo-connect';
 
 export default function AdminDeleteConfirmationOpenday() {
@@ -25,6 +27,7 @@ export default function AdminDeleteConfirmationOpenday() {
 
   return (
     <>
+      <NavBarAdmin></NavBarAdmin>
       <form onSubmit={handleSubmit}>
         <h1>Confirmation de la suppression</h1>
         <p>
@@ -35,8 +38,8 @@ export default function AdminDeleteConfirmationOpenday() {
           Cette action est irréversible, et ne peut faire l'objet d'un retour en arrière et d'un
           gâteau !
         </p>
-        <button type='submit'>Supprimer</button>
-        <Link to='/admin/opendays'>Revenir en arrière</Link>
+        <button type="submit">Supprimer</button>
+        <Link to="/admin/opendays">Revenir en arrière</Link>
       </form>
     </>
   );

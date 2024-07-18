@@ -1,23 +1,10 @@
 import React, { FormEvent } from "react";
 import axios from "axios";
 
+import NavBar from "../../assets/components/header";
+import "../../assets/styles/register.css";
+
 const RegisterForm: React.FC = () => {
-  // const [formData, setFormData] = useState({
-  //   firstname: "",
-  //   lastname: "",
-  //   email: "",
-  //   password: "",
-  //   role: "",
-  // });
-
-  // const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-  //   const { name, value } = e.target;
-  //   setFormData({
-  //     ...formData,
-  //     [name]: value,
-  //   });
-  // };
-
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     // permet d'éviter de recharger la page
     e.preventDefault();
@@ -52,29 +39,14 @@ const RegisterForm: React.FC = () => {
       .catch((error) => console.error(error));
 
     form.reset();
-    // try {
-    //   const response = await axios.post(
-    //     "http://localhost:80/jpo-connect/api/index.php?query=register",
-    //     new URLSearchParams(formData).toString(),
-    //     {
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //     }
-    //   );
-
-    //   console.log("Réponse du serveur:", response.data);
-    //   console.log(formData);
-    // } catch (error: any) {
-    //   if (error instanceof Error) {
-    //     console.error("Erreur lors de l'envoi des données:", error.message);
-    //     console.error("Erreur inconnue:", error);
-    //   }
-    // }
   };
 
   return (
     <div>
+      <div className="App">
+        <NavBar />
+      </div>
+      <h1 className="title">Inscription</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="firstname">Prénom:</label>

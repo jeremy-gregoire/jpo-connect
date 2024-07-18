@@ -3,6 +3,8 @@ import { FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 
+import NavBarAdmin from "../../assets/components/header_admin";
+
 const OpendaySchema = z.object({
   title: z.string(),
   description: z.string(),
@@ -94,21 +96,22 @@ export default function AdminAddOpenday() {
 
   return (
     <>
+      <NavBarAdmin></NavBarAdmin>
       <h1>Ajouter une journée portes ouvertes</h1>
-      <form onSubmit={handleSubmit} method='post'>
+      <form onSubmit={handleSubmit} method="post">
         <div>
-          <label htmlFor='title'>Titre</label>
-          <input type='text' name='title' id='title' />
+          <label htmlFor="title">Titre</label>
+          <input type="text" name="title" id="title" />
         </div>
 
         <div>
-          <label htmlFor='description'>Description</label>
-          <textarea name='description' id='description' />
+          <label htmlFor="description">Description</label>
+          <textarea name="description" id="description" />
         </div>
 
         <div>
-          <label htmlFor='place'>Lieu</label>
-          <select name='place' id='place'>
+          <label htmlFor="place">Lieu</label>
+          <select name="place" id="place">
             {places.map((place) => {
               return (
                 <option key={crypto.randomUUID()} value={place.id}>
@@ -120,38 +123,38 @@ export default function AdminAddOpenday() {
         </div>
 
         <div>
-          <label htmlFor='max_participants'>Maximum de participant</label>
+          <label htmlFor="max_participants">Maximum de participant</label>
           <input
-            type='number'
-            name='max_participants'
-            id='max_participants'
+            type="number"
+            name="max_participants"
+            id="max_participants"
             defaultValue={0}
             min={0}
           />
         </div>
 
         <div>
-          <label htmlFor='opening_date'>Date d'ouverture</label>
+          <label htmlFor="opening_date">Date d'ouverture</label>
           <input
-            type='date'
-            name='opening_date'
-            id='opening_date'
+            type="date"
+            name="opening_date"
+            id="opening_date"
             min={todayDate}
             defaultValue={todayDate}
           />
         </div>
 
         <div>
-          <label htmlFor='opening_time'>Heure d'ouverture</label>
-          <input type='time' name='opening_time' id='opening_time' />
+          <label htmlFor="opening_time">Heure d'ouverture</label>
+          <input type="time" name="opening_time" id="opening_time" />
         </div>
 
         <div>
-          <label htmlFor='closing_time'>Heure de fermeture</label>
-          <input type='time' name='closing_time' id='closing_time' />
+          <label htmlFor="closing_time">Heure de fermeture</label>
+          <input type="time" name="closing_time" id="closing_time" />
         </div>
 
-        <button type='submit'>Ajouter</button>
+        <button type="submit">Ajouter</button>
       </form>
     </>
   );

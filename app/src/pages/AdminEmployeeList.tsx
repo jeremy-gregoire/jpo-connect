@@ -1,8 +1,10 @@
-import axios from 'axios';
-import { FormEvent, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+import { FormEvent, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const apiPath = 'http://localhost:80/webalizer/jpo-connect';
+import NavBarAdmin from "../../assets/components/header_admin";
+
+const apiPath = "http://localhost:80/webalizer/jpo-connect";
 
 type Employee = {
   id: number;
@@ -23,7 +25,7 @@ export default function AdminEmployeeList() {
   const navigate = useNavigate();
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [roles, setRoles] = useState<Role[]>([]);
-  const [selectedRole, setSelectedRole] = useState<string>('3');
+  const [selectedRole, setSelectedRole] = useState<string>("3");
 
   useEffect(() => {
     axios
@@ -48,6 +50,7 @@ export default function AdminEmployeeList() {
 
   return (
     <>
+      <NavBarAdmin></NavBarAdmin>
       <table>
         <thead>
           <tr>
@@ -55,7 +58,7 @@ export default function AdminEmployeeList() {
             <td>
               <button
                 onClick={() => {
-                  navigate('/admin/employee/add');
+                  navigate("/admin/employee/add");
                 }}
               >
                 Ajouter
@@ -86,11 +89,11 @@ export default function AdminEmployeeList() {
                 <td>{employee.updated_at}</td>
                 <td>{employee.created_at}</td>
                 <td>
-                  <form onSubmit={handleSubmit} method='post'>
-                    <input type='hidden' name='employeeId' value={employee.id} />
+                  <form onSubmit={handleSubmit} method="post">
+                    <input type="hidden" name="employeeId" value={employee.id} />
                     <select
-                      name='roles'
-                      id='roles'
+                      name="roles"
+                      id="roles"
                       value={selectedRole}
                       onChange={(e) => setSelectedRole(e.target.value as string)}
                     >
@@ -102,7 +105,7 @@ export default function AdminEmployeeList() {
                         );
                       })}
                     </select>
-                    <button type='submit'>Modifier</button>
+                    <button type="submit">Modifier</button>
                   </form>
                 </td>
                 <td>

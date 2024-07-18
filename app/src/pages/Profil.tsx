@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+import NavBar from "../../assets/components/header";
+
 const apiPath = "http://localhost:80/webalizer/jpo-connect";
 
 const Details: React.FC = () => {
@@ -127,6 +129,10 @@ const Details: React.FC = () => {
 
   return (
     <>
+      <div className="App">
+        <NavBar />
+      </div>
+      <h1 className="title">Profil</h1>
       {error && <p>Erreur: {error.message}</p>}
       <p>{profileData}</p>
       {editableData && (

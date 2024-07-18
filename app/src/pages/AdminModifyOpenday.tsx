@@ -1,9 +1,11 @@
-import axios from 'axios';
-import { FormEvent, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { z } from 'zod';
+import axios from "axios";
+import { FormEvent, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { z } from "zod";
 
-const apiPath = 'http://localhost:80/webalizer/jpo-connect';
+import NavBarAdmin from "../../assets/components/header_admin";
+
+const apiPath = "http://localhost:80/webalizer/jpo-connect";
 
 const OpendaySchema = z.object({
   id: z.number(),
@@ -33,9 +35,9 @@ const OpendayRespectSchema = z.object({
   description: z.string(),
   max_participants: z.number().min(0),
   nb_participants: z.number().min(0),
-  opening_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Invalid date format'), // YYYY-MM-DD
-  opening_time: z.string().regex(/^\d{2}:\d{2}:\d{2}$/, 'Invalid time format'), // HH:MM:SS
-  closing_time: z.string().regex(/^\d{2}:\d{2}:\d{2}$/, 'Invalid time format'), // HH:MM:SS
+  opening_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date format"), // YYYY-MM-DD
+  opening_time: z.string().regex(/^\d{2}:\d{2}:\d{2}$/, "Invalid time format"), // HH:MM:SS
+  closing_time: z.string().regex(/^\d{2}:\d{2}:\d{2}$/, "Invalid time format"), // HH:MM:SS
   id_place: z.number(),
 });
 
@@ -60,10 +62,10 @@ export default function AdminModifyOpenday() {
         },
         {
           params: {
-            query: 'openday',
+            query: "openday",
           },
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
       )
@@ -88,14 +90,14 @@ export default function AdminModifyOpenday() {
     const formData = new FormData(form);
 
     const openday: OpendayRespect = {
-      title: formData.get('title')?.toString() || '',
-      description: formData.get('description')?.toString() || '',
-      max_participants: parseInt(formData.get('max_participants')?.toString() || '0'),
-      nb_participants: parseInt(formData.get('nb_participants')?.toString() || '0'),
-      opening_date: formData.get('opening_date')?.toString() || '',
-      opening_time: formData.get('opening_time')?.toString() || '',
-      closing_time: formData.get('closing_time')?.toString() || '',
-      id_place: parseInt(formData.get('place')?.toString() || '1'),
+      title: formData.get("title")?.toString() || "",
+      description: formData.get("description")?.toString() || "",
+      max_participants: parseInt(formData.get("max_participants")?.toString() || "0"),
+      nb_participants: parseInt(formData.get("nb_participants")?.toString() || "0"),
+      opening_date: formData.get("opening_date")?.toString() || "",
+      opening_time: formData.get("opening_time")?.toString() || "",
+      closing_time: formData.get("closing_time")?.toString() || "",
+      id_place: parseInt(formData.get("place")?.toString() || "1"),
     };
     const safeObject = OpendayRespectSchema.safeParse(openday);
 
@@ -116,14 +118,14 @@ export default function AdminModifyOpenday() {
           },
           {
             params: {
-              query: 'modifyOpenday',
+              query: "modifyOpenday",
             },
             headers: {
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json",
             },
           }
         )
-        .then((_) => navigate('/admin/opendays'))
+        .then((_) => navigate("/admin/opendays"))
         .catch((error) => console.log(error));
     } else {
       console.error(safeObject.error.message);
@@ -132,22 +134,23 @@ export default function AdminModifyOpenday() {
 
   return (
     <>
-      <form method='post' onSubmit={handleSubmit}>
+      <NavBarAdmin></NavBarAdmin>
+      <form method="post" onSubmit={handleSubmit}>
         <div>
-          <label htmlFor='title'>Titre</label>
-          <input type='text' name='title' id='title' defaultValue={openday.title} />
+          <label htmlFor="title">Titre</label>
+          <input type="text" name="title" id="title" defaultValue={openday.title} />
         </div>
 
         <div>
-          <label htmlFor='description'>Description</label>
-          <textarea name='description' id='description' defaultValue={openday.description} />
+          <label htmlFor="description">Description</label>
+          <textarea name="description" id="description" defaultValue={openday.description} />
         </div>
 
         <div>
-          <label htmlFor='place'>Lieu</label>
+          <label htmlFor="place">Lieu</label>
           <select
-            name='place'
-            id='place'
+            name="place"
+            id="place"
             value={selectedPlace}
             onChange={(e) => setSelectedPlace(e.target.value)}
           >
@@ -162,48 +165,48 @@ export default function AdminModifyOpenday() {
         </div>
 
         <div>
-          <label htmlFor='max_participants'>Maximum de participant</label>
+          <label htmlFor="max_participants">Maximum de participant</label>
           <input
-            type='number'
-            name='max_participants'
-            id='max_participants'
+            type="number"
+            name="max_participants"
+            id="max_participants"
             defaultValue={openday.max_participants}
             min={0}
           />
         </div>
 
         <div>
-          <label htmlFor='opening_date'>Date d'ouverture</label>
+          <label htmlFor="opening_date">Date d'ouverture</label>
           <input
-            type='date'
-            name='opening_date'
-            id='opening_date'
+            type="date"
+            name="opening_date"
+            id="opening_date"
             defaultValue={openday.opening_date}
           />
         </div>
 
         <div>
-          <label htmlFor='opening_time'>Heure d'ouverture</label>
+          <label htmlFor="opening_time">Heure d'ouverture</label>
           <input
-            type='time'
-            name='opening_time'
-            id='opening_time'
+            type="time"
+            name="opening_time"
+            id="opening_time"
             defaultValue={openday.opening_time}
           />
         </div>
 
         <div>
-          <label htmlFor='closing_time'>Heure de fermeture</label>
+          <label htmlFor="closing_time">Heure de fermeture</label>
           <input
-            type='time'
-            name='closing_time'
-            id='closing_time'
+            type="time"
+            name="closing_time"
+            id="closing_time"
             defaultValue={openday.closing_time}
           />
         </div>
 
         <div>
-          <button type='submit'>Modifier</button>
+          <button type="submit">Modifier</button>
         </div>
       </form>
     </>
