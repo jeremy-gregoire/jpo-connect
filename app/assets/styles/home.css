@@ -1,0 +1,33 @@
+.card {
+  border: 1px solid #ddd;
+  margin: 20px;
+  text-align: center;
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card_text {
+  text-decoration: none;
+  color: inherit;
+}
+
+.card_img {
+  max-width: 50%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.card_title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 8px;
+  color: #333;
+  background-color: lightgray;
+  display: block;
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}

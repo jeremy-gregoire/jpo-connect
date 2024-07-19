@@ -24,7 +24,7 @@ const NavBarAdmin = () => {
               }
               to="/admin/opendays"
             >
-              JPO
+              Gestion JPO
             </NavLink>
           </li>
           <li className="mainLi">
@@ -45,7 +45,7 @@ const NavBarAdmin = () => {
               }
               to="#"
             >
-              Se déconnecter
+              Déconnexion
             </NavLink>
           </li>
         </nav>
