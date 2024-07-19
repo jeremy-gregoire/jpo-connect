@@ -1,49 +1,53 @@
 import { NavLink } from "react-router-dom";
-import "../styles/navadmin.css";
+import "../styles/headeradmin.css";
 
 const NavBarAdmin = () => {
   return (
     <>
-      <div className="vertical">
-        <nav className="navAdmin">
-          <ul>
-            <li>
-              <NavLink className="navAdminLink" to="/home">
-                Accueil
-              </NavLink>
-            </li>
-            <li>
-              <NavLink className="navAdminLink" to="/admin/opendays">
-                Les Journées Porte Ouvertes
-              </NavLink>
-            </li>
+      <div className="mainNav">
+        <img className="logo" src="../assets/images/logos/logo.png" alt="logo plateforme bleu" />
+        <nav className="nav">
+          <li className="mainLi">
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "mainLink mainRef active" : "mainLink mainRef"
+              }
+              to="/home"
+            >
+              Accueil
+            </NavLink>
+          </li>
+          <li className="mainLi">
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "mainLink mainRef active" : "mainLink mainRef"
+              }
+              to="/admin/opendays"
+            >
+              JPO
+            </NavLink>
+          </li>
+          <li className="mainLi">
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "mainLink mainRef active" : "mainLink mainRef"
+              }
+              to="/admin/employees"
+            >
+              Gestion employées
+            </NavLink>
+          </li>
 
-            <li>
-              <NavLink className="navAdminLink" to="/admin/openday/:id/modify">
-                Openday
-              </NavLink>
-            </li>
-            <li>
-              <NavLink className="navAdminLink" to="/admin/openday/:id/delete">
-                Openday
-              </NavLink>
-            </li>
-            <li>
-              <NavLink className="navAdminLink" to="/admin/employees">
-                Openday
-              </NavLink>
-            </li>
-            <li>
-              <NavLink className="navAdminLink" to="/admin/employee/add">
-                Openday
-              </NavLink>
-            </li>
-            <li>
-              <NavLink className="navAdminLink" to="/admin/employee/:id/delete">
-                Openday
-              </NavLink>
-            </li>
-          </ul>
+          <li className="mainLi">
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "mainLink mainRef active" : "mainLink mainRef"
+              }
+              to="#"
+            >
+              Se déconnecter
+            </NavLink>
+          </li>
         </nav>
       </div>
     </>

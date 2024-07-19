@@ -1,0 +1,45 @@
+/* main NavBar */
+.mainNav {
+  background-color: #0062ff;
+  display: flex;
+  align-items: center; /* Assure que les items sont centrés verticalement */
+}
+.nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  background-color: white;
+  width: 100px;
+}
+
+.mainLi {
+  display: flex;
+  justify-content: center;
+  height: 100%; /* Prend toute la hauteur de la nav */
+}
+
+.mainRef {
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  height: 100%; /* Prend toute la hauteur de l'élément parent */
+  padding: 0 10px; /* Ajoute un padding horizontal pour les liens */
+  padding-left: 25px;
+  padding-right: 25px;
+  font-size: 20px;
+}
+
+.mainNav .mainUl .mainLink.mainRef.active {
+  /* Styles pour les liens actifs dans mainNav */
+  font-weight: bold;
+  color: blue;
+  background: rgb(255, 255, 255);
+  backdrop-filter: blur(10.5px);
+  -webkit-backdrop-filter: blur(10.5px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}

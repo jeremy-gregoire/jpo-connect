@@ -37,9 +37,7 @@ export default function App() {
         <Route path="/admin/employee/add" element={<AdminAddEmployee />} />
         <Route path="/admin/employee/:id/delete" element={<AdminDeleteConfirmationEmployee />} />
       </Routes>
-      <div className="App">
-        <Footer />
-      </div>
+      <Footer />
     </>
   );
 }

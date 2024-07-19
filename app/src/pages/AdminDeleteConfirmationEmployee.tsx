@@ -1,10 +1,10 @@
-import axios from 'axios';
-import { FormEvent } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import axios from "axios";
+import { FormEvent } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import NavBarAdmin from "../../assets/components/header_admin";
 
-const apiPath = 'http://localhost:80/webalizer/jpo-connect';
+const apiPath = "http://localhost:80/webalizer/jpo-connect";
 
 export default function AdminDeleteConfirmationEmployee() {
   const { id } = useParams();
@@ -18,7 +18,7 @@ export default function AdminDeleteConfirmationEmployee() {
         id: id,
       },
       params: {
-        query: 'deleteEmployee',
+        query: "deleteEmployee",
       },
     });
 
@@ -28,8 +28,8 @@ export default function AdminDeleteConfirmationEmployee() {
   return (
     <>
       <NavBarAdmin></NavBarAdmin>
+      <h1>Confirmation de la suppression</h1>
       <form onSubmit={handleSubmit}>
-        <h1>Confirmation de la suppression</h1>
         <p>
           Vous vous apprêtiez à supprimer un employé de la boite. Il/Elle sera supprimée de la base
           de données.

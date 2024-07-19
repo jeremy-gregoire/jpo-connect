@@ -28,6 +28,7 @@ export default function AdminDeleteConfirmationOpenday() {
   return (
     <>
       <NavBarAdmin></NavBarAdmin>
+      <h1 className="title">Supprimer un employé</h1>
       <form onSubmit={handleSubmit}>
         <h1>Confirmation de la suppression</h1>
         <p>

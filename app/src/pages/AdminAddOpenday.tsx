@@ -97,7 +97,7 @@ export default function AdminAddOpenday() {
   return (
     <>
       <NavBarAdmin></NavBarAdmin>
-      <h1>Ajouter une journée portes ouvertes</h1>
+      <h1 className="title">Ajouter une journée portes ouvertes</h1>
       <form onSubmit={handleSubmit} method="post">
         <div>
           <label htmlFor="title">Titre</label>

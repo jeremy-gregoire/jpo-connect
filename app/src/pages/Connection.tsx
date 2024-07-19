@@ -57,6 +57,7 @@ const Login: React.FC = () => {
       <div className="App">
         <NavBar />
       </div>
+      <h1 className='title'>Se connecter</h1>
       {error && <p>Erreur: {error}</p>}
       {profileData ? (
         <div>

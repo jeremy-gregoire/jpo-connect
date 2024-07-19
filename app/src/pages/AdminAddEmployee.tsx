@@ -67,7 +67,7 @@ export default function AdminAddEmployee() {
   return (
     <>
       <NavBarAdmin></NavBarAdmin>
-      <h1>Ajouter un employé</h1>
+      <h1 className="title">Ajouter un employé</h1>
       <form onSubmit={handleSubmit} method="post">
         <div>
           <label htmlFor="firstname">Prénom</label>

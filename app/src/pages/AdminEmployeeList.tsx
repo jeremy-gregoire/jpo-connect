@@ -51,6 +51,7 @@ export default function AdminEmployeeList() {
   return (
     <>
       <NavBarAdmin></NavBarAdmin>
+      <h1 className="title">Liste des employées</h1>
       <table>
         <thead>
           <tr>

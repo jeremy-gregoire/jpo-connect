@@ -135,6 +135,7 @@ export default function AdminModifyOpenday() {
   return (
     <>
       <NavBarAdmin></NavBarAdmin>
+      <h1 className="title">Modifier une porte ouverte</h1>
       <form method="post" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="title">Titre</label>

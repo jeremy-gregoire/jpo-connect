@@ -40,7 +40,7 @@ export default function AdminOpendayList() {
   return (
     <>
       <NavBarAdmin></NavBarAdmin>
-      <h1>Gestion des journées portes ouvertes</h1>
+      <h1 className="title">Gestion des journées portes ouvertes</h1>
       <table>
         <thead>
           <tr>
