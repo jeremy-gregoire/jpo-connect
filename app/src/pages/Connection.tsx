@@ -89,7 +89,7 @@ const Login: React.FC = () => {
               required
             />
           </div>
-          <button type="submit">Se connecter</button>
+          <button type="submit">Se connecter !</button>
         </form>
       )}
     </>
