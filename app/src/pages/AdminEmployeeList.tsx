@@ -3,6 +3,7 @@ import { FormEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import NavBarAdmin from "../../assets/components/header_admin";
+import "../../assets/styles/opendays.css";
 
 const apiPath = "http://localhost:80/webalizer/jpo-connect";
 
@@ -52,77 +53,79 @@ export default function AdminEmployeeList() {
     <>
       <NavBarAdmin></NavBarAdmin>
       <h1 className="title">Liste des employées</h1>
-      <table>
-        <thead>
-          <tr>
-            <td colSpan={8}></td>
-            <td>
-              <button
-                onClick={() => {
-                  navigate("/admin/employee/add");
-                }}
-              >
-                Ajouter
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <th>#</th>
-            <th>firstname</th>
-            <th>lastname</th>
-            <th>email</th>
-            <th>avatar</th>
-            <th>Compte modifier le</th>
-            <th>Enregistrer le</th>
-            <th>Role</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {employees.map((employee) => {
-            return (
-              <tr key={crypto.randomUUID()}>
-                <td>{employee.id}</td>
-                <td>{employee.firstname}</td>
-                <td>{employee.lastname}</td>
-                <td>{employee.email}</td>
-                <td>{employee.avatar}</td>
-                <td>{employee.updated_at}</td>
-                <td>{employee.created_at}</td>
-                <td>
-                  <form onSubmit={handleSubmit} method="post">
-                    <input type="hidden" name="employeeId" value={employee.id} />
-                    <select
-                      name="roles"
-                      id="roles"
-                      value={selectedRole}
-                      onChange={(e) => setSelectedRole(e.target.value as string)}
+      <button
+        className="addButton"
+        onClick={() => {
+          navigate("/admin/employee/add");
+        }}
+      >
+        Ajouter
+      </button>
+      <div className="table">
+        <table>
+          <thead>
+            <tr>
+              <td colSpan={8}></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th className="titreTH">#</th>
+              <th className="titreTH">firstname</th>
+              <th className="titreTH">lastname</th>
+              <th className="titreTH">email</th>
+              <th className="titreTH">avatar</th>
+              <th className="titreTH">Compte modifier le</th>
+              <th className="titreTH">Enregistrer le</th>
+              <th className="titreTH">Role</th>
+              <th className="titreTH">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {employees.map((employee) => {
+              return (
+                <tr key={crypto.randomUUID()}>
+                  <td>{employee.id}</td>
+                  <td>{employee.firstname}</td>
+                  <td>{employee.lastname}</td>
+                  <td>{employee.email}</td>
+                  <td>{employee.avatar}</td>
+                  <td>{employee.updated_at}</td>
+                  <td>{employee.created_at}</td>
+                  <td>
+                    <form onSubmit={handleSubmit} method="post">
+                      <input type="hidden" name="employeeId" value={employee.id} />
+                      <select
+                        name="roles"
+                        id="roles"
+                        value={selectedRole}
+                        onChange={(e) => setSelectedRole(e.target.value as string)}
+                      >
+                        {roles.map((role) => {
+                          return (
+                            <option key={crypto.randomUUID()} value={role.id}>
+                              {role.label}
+                            </option>
+                          );
+                        })}
+                      </select>
+                      <button type="submit">Modifier</button>
+                    </form>
+                  </td>
+                  <td>
+                    <button
+                      onClick={() => {
+                        navigate(`/admin/employee/${employee.id}/delete`);
+                      }}
                     >
-                      {roles.map((role) => {
-                        return (
-                          <option key={crypto.randomUUID()} value={role.id}>
-                            {role.label}
-                          </option>
-                        );
-                      })}
-                    </select>
-                    <button type="submit">Modifier</button>
-                  </form>
-                </td>
-                <td>
-                  <button
-                    onClick={() => {
-                      navigate(`/admin/employee/${employee.id}/delete`);
-                    }}
-                  >
-                    Supprimer
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+                      Supprimer
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </>
   );
 }

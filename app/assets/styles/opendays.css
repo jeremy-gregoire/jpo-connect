@@ -1,0 +1,19 @@
+.table {
+  display: flex;
+  justify-content: center;
+}
+.addButton {
+  margin: auto;
+  margin-bottom: 10px;
+  width: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.titreTH {
+  background-color: lightgray;
+  padding: 10px;
+}
+.textTD{
+    padding: 20px;
+}
